@@ -1,0 +1,22 @@
+window.LEAGUE_seriea = [
+  { name: "Napoli", short: "NAP", image: "images/napoli.png" },
+  { name: "Juventus", short: "JUV", image: "images/juve.png" },
+  { name: "Inter Milan", short: "INT", image: "images/inter.png" },
+  { name: "AC Milan", short: "MIL", image: "images/milan.png" },
+  { name: "AS Roma", short: "ROM", image: "images/roma.png" },
+  { name: "Atalanta", short: "ATA", image: "images/atalanta.png" },
+  { name: "Lazio", short: "LAZ", image: "images/lazio.png" },
+  { name: "Fiorentina", short: "FIO", image: "images/fiorentina.png" },
+  { name: "Udinese", short: "UDI", image: "images/udinese.png" },
+  { name: "Bologna", short: "BOL", image: "images/bologna.png" },
+  { name: "Torino", short: "TOR", image: "images/torino.png" },
+  { name: "Sassuolo", short: "SAS", image: "images/sassuolo.png" },
+  { name: "Como", short: "COM", image: "images/como.png" },
+  { name: "Cremonese", short: "CRE", image: "images/cremonese.png" },
+  { name: "Lecce", short: "LEC", image: "images/lecce.png" },
+  { name: "Parma", short: "PAR", image: "images/parma.png" },
+  { name: "Genoa", short: "GEN", image: "images/genoa.png" },
+  { name: "Pisa", short: "PIS", image: "images/pisa.png" },
+  { name: "Cagliari", short: "CAG", image: "images/cagliari.png" },
+  { name: "Hellas Verona", short: "VER", image: "images/hv.png" }
+];

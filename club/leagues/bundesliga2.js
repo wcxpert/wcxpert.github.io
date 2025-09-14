@@ -1,0 +1,20 @@
+window.LEAGUE_bundesliga2 = [
+  { name: "Hannover 96", short: "H96", image: "images/hannover.png" },
+  { name: "Karlsruher SC", short: "KSC", image: "images/karlsruher.png" },
+  { name: "Arminia Bielefeld", short: "BIE", image: "images/bielefeld.png" },
+  { name: "Darmstadt 98", short: "D98", image: "images/darmstadt.png" },
+  { name: "Preußen Münster", short: "PMU", image: "images/prussia.png" },
+  { name: "1. FC Kaiserslautern", short: "FCK", image: "images/1fck.png" },
+  { name: "SV Elversberg", short: "ELV", image: "images/elversberg.png" },
+  { name: "Schalke 04", short: "S04", image: "images/s04.png" },
+  { name: "SC Paderborn 07", short: "PAD", image: "images/paderborn.png" },
+  { name: "Eintracht Braunschweig", short: "EBS", image: "images/eintracht.png" },
+  { name: "Dynamo Dresden", short: "DYN", image: "images/dresden.png" },
+  { name: "Holstein Kiel", short: "KIE", image: "images/holsteinkiel.png" },
+  { name: "Greuther Fürth", short: "FUR", image: "images/greuther.png" },
+  { name: "Hertha BSC", short: "BSC", image: "images/hertha.png" },
+  { name: "Fortuna Düsseldorf", short: "F95", image: "images/dusseldorf.png" },
+  { name: "VfL Bochum", short: "BOC", image: "images/bochum.png" },
+  { name: "1. FC Magdeburg", short: "MAG", image: "images/magdeburg.png" },
+  { name: "1. FC Nürnberg", short: "FCN", image: "images/nurnberg.png" }
+];

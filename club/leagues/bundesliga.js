@@ -1,0 +1,20 @@
+window.LEAGUE_bundesliga = [
+  { name: "Bayern Munich", short: "FCB", image: "images/bayern.png" },
+  { name: "Borussia Dortmund", short: "BVB", image: "images/bvb.png" },
+  { name: "Bayer Leverkusen", short: "B04", image: "images/b04.png" },
+  { name: "RB Leipzig", short: "RBL", image: "images/leipzig.png" },
+  { name: "Eintracht Frankfurt", short: "SGE", image: "images/frankfurt.png" },
+  { name: "VfB Stuttgart", short: "VFB", image: "images/stuttgart.png" },
+  { name: "VfL Wolfsburg", short: "WOB", image: "images/wolfsburg.png" },
+  { name: "Werder Bremen", short: "SVW", image: "images/wb.png" },
+  { name: "TSG Hoffenheim", short: "TSG", image: "images/hoffenheim.png" },
+  { name: "Borussia Mönchengladbach", short: "BMG", image: "images/gladbach.png" },
+  { name: "Union Berlin", short: "FCU", image: "images/ub.png" },
+  { name: "FC Augsburg", short: "FCA", image: "images/augsburg.png" },
+  { name: "1. FC Köln", short: "KOE", image: "images/koln.png" },
+  { name: "SC Freiburg", short: "SCF", image: "images/freiburg.png" },
+  { name: "Mainz 05", short: "M05", image: "images/mainz.png" },
+  { name: "Hamburger SV", short: "HSV", image: "images/hamburger.png" },
+  { name: "1. FC Heidenheim", short: "HDH", image: "images/fch.png" },
+  { name: "FC St. Pauli", short: "STP", image: "images/pauli.png" }
+];
