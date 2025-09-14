@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Football Club Randomiser</title>
+<style>
+    :root{
+      --bg: #0f1724;
+      --card: linear-gradient(135deg,#0ea5a4 0%, #6366f1 100%);
+      --muted: #94a3b8;
+      --glass: rgba(255,255,255,0.04);
+      --accent: #10b981;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;background:linear-gradient(180deg,#071129 0%, #071120 60%);color:#e6eef8;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px}
+
+    .app{
+      width:980px;max-width:96%;background:radial-gradient(800px 400px at 10% 10%, rgba(99,102,241,0.06), transparent 10%), radial-gradient(600px 300px at 90% 90%, rgba(16,185,129,0.03), transparent 10%), rgba(7,17,36,0.6);border-radius:18px;padding:24px;box-shadow:0 10px 30px rgba(2,6,23,0.7);backdrop-filter: blur(6px);border:1px solid rgba(255,255,255,0.035)
+    }
+
+    header{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+    .logo{width:60px;height:60px;border-radius:12px;background:linear-gradient(135deg,#06b6d4,#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;color:white;box-shadow:0 6px 18px rgba(99,102,241,0.12)}
+    h1{font-size:20px;margin:0}
+    p.lead{margin:0;color:var(--muted);font-size:13px}
+
+    .grid{display:grid;grid-template-columns:360px 1fr;gap:18px}
+
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+
+    .preview{display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px}
+    .club-pic{width:220px;height:220px;border-radius:16px;background:var(--glass);display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
+    .club-pic img{width:100%;height:100%;object-fit:cover}
+    .club-name{text-align:center;font-weight:600;font-size:18px;margin-top:6px}
+    .club-sub{color:var(--muted);font-size:13px;margin-top:4px}
+
+    .controls{display:flex;flex-direction:column;gap:12px;width:100%}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:10px;font-weight:600;border:none;cursor:pointer}
+    .btn-random{background:var(--card);color:white;box-shadow:0 8px 30px rgba(99,102,241,0.18);transform:translateY(0);transition:transform .12s}
+    .btn-random:active{transform:translateY(2px)}
+    .btn-settings{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    .quicklist{display:flex;gap:8px;flex-wrap:wrap}
+    .pill{background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted);border:1px solid rgba(255,255,255,0.02)}
+
+    .settings-panel{display:flex;flex-direction:column;gap:12px}
+    .league-row{display:flex;align-items:center;gap:12px}
+    .league-row input{width:18px;height:18px}
+    .muted{color:var(--muted);font-size:13px}
+
+    footer{margin-top:16px;display:flex;justify-content:space-between;align-items:center}
+    .small{color:var(--muted);font-size:13px}
+
+    /* subtle glow animation on cycling */
+    .pulse{animation:pulse 1s infinite}
+    @keyframes pulse{0%{box-shadow:0 8px 20px rgba(16,185,129,0.02)}50%{box-shadow:0 14px 30px rgba(16,185,129,0.06)}100%{box-shadow:0 8px 20px rgba(16,185,129,0.02)}}
+
+    /* responsive */
+    @media (max-width:880px){.grid{grid-template-columns:1fr;}.club-pic{width:180px;height:180px}}
+  
+.flag-icon {
+  width: 20px;
+  height: 14px;
+  object-fit: cover;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.country-header:hover {
+  background: rgba(255,255,255,0.04);
+  border-radius: 6px;
+}
+
+.flag-icon {
+  width: 20px;
+  height: 14px;
+  object-fit: cover;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.country-header:hover {
+  background: rgba(255,255,255,0.04);
+  border-radius: 6px;
+}
+.country-block {
+  background: rgba(255,255,255,0.02);
+  border-radius: 8px;
+  margin: 8px 0;
+  padding: 6px 10px;
+}
+
+.country-header { user-select:none; }
+.country-header:focus { outline:none; }
+
+.randomiser-box {
+  background: rgba(255,255,255,0.02);
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+}
+
+.club-pic img {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.club-name {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.club-league {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+</style>
+</head>
+<body>
+<div aria-label="Football club randomiser" class="app" role="application">
+<header>
+<div class="logo"> </div>
+<div>
+<h1>Football Club Randomiser</h1>
+<p class="lead">Pick a league (or several) and press <strong>Randomise</strong>. Rapid preview for 1-10 seconds, then land on a club.</p>
+</div>
+</header>
+<main class="grid">
+<section aria-live="polite" class="card preview">
+<div class="club-pic" id="clubPic" title="Club badge or generated artwork">
+<!-- image inserted here -->
+</div>
+<div class="club-name" id="clubName">Press Randomise</div>
+<div class="club-sub" id="clubLeague"></div>
+<div style="display:flex;gap:12px;margin-top:14px">
+<button class="btn btn-random" id="randomBtn">Randomise</button>
+<button class="btn btn-settings" id="openSettings">Settings</button>
+</div>
+<div style="width:100%;margin-top:12px">
+<div class="quicklist" id="selectedPreview"></div>
+</div>
+</section>
+<aside aria-hidden="true" class="card settings-panel" id="settingsPanel">
+<div>
+<div style="display:flex;justify-content:space-between;align-items:center">
+<strong>Leagues</strong>
+<span class="muted"> </span>
+</div>
+<p class="muted" style="margin:6px 0 0">Toggle leagues to include them in the pool.</p>
+</div>
+<div id="leaguesContainer">
+<!-- league rows appended here -->
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+<div class="muted">Cycle duration <span id="durationLabel">5s</span></div>
+<input id="durationRange" max="10" min="1" type="range" value="5"/>
+</div>
+<div style="display:flex;gap:8px;margin-top:8px">
+<button class="btn btn-random" id="applyBtn">Apply</button>
+<button class="btn btn-settings" id="closeSettings">Close</button>
+</div>
+<div class="muted" style="margin-top:8px"> </div>
+</aside>
+</main>
+<footer>
+<div class="small">Made with ❤️ — instant club images are generated when not supplied.</div>
+<div class="small">© WCXpert</div>
+</footer>
+</div>
+<!--
+    ======= Example separate league JS files =======
+    Create files next to this HTML in a "leagues" folder. Example filenames & contents:
+
+    // leagues/premier-league.js
+    window.LEAGUE_premier = [
+      { name: 'Manchester United', short: 'MUN', image: 'images/manu.png' },
+      { name: 'Arsenal', short: 'ARS', image: 'images/arsenal.png' },
+      // ... more clubs
+    ];
+
+    // leagues/la-liga.js
+    window.LEAGUE_laliga = [
+      { name: 'Real Madrid', short: 'RMA', image: 'images/realmadrid.png' },
+      { name: 'Barcelona', short: 'BAR', image: 'images/barca.png' },
+    ];
+
+    The main script below will attempt to dynamically load these files by adding a <script> tag.
+    If the files are unavailable it will fall back to built-in sample data so the app still works.
+  -->
+<script>
+// Flag PNGs (put in /flags folder)
+const FLAGS = {
+  England: "flags/ENG.png",
+  Spain: "flags/ESP.png",
+  Germany: "flags/GER.png",
+  Italy: "flags/ITA.png",
+  France: "flags/FRA.png"
+};
+
+const FALLBACK_LEAGUES = {
+  premier: { id:"premier", country:"England", label:"Premier League", file:"leagues/premier-league.js", clubs:[
+    { name: "Liverpool", short: "LIV" }, { name: "Manchester City", short: "MCI" }, { name: "Arsenal", short: "ARS" },
+    { name: "Chelsea", short: "CHE" }, { name: "Tottenham Hotspur", short: "TOT" }, { name: "Everton", short: "EVE" },
+    { name: "Manchester United", short: "MUN" }, { name: "Newcastle United", short: "NEW" }, { name: "Aston Villa", short: "AVL" },
+    { name: "Brighton & Hove Albion", short: "BHA" }, { name: "West Ham United", short: "WHU" }, { name: "Bournemouth", short: "BOU" },
+    { name: "Crystal Palace", short: "CRY" }, { name: "Brentford", short: "BRE" }, { name: "Fulham", short: "FUL" },
+    { name: "Leeds United", short: "LEE" }, { name: "Burnley", short: "BUR" }, { name: "Sunderland", short: "SUN" },
+    { name: "Wolves", short: "WOL" }, { name: "Nottingham Forest", short: "NFO" }
+  ] },
+  championship: { id:"championship", country:"England", label:"EFL Championship", file:"leagues/championship.js", clubs:[] },
+  laliga: { id:"laliga", country:"Spain", label:"LALIGA", file:"leagues/la-liga.js", clubs:[
+    { name: "Real Madrid", short: "RMA" }, { name: "Barcelona", short: "BAR" }, { name: "Atlético de Madrid", short: "ATM" },
+    { name: "Athletic Bilbao", short: "ATH" }, { name: "Real Sociedad", short: "RSO" }, { name: "Villarreal", short: "VIL" },
+    { name: "Sevilla", short: "SEV" }, { name: "Real Betis", short: "BET" }, { name: "Valencia", short: "VAL" },
+    { name: "Girona", short: "GIR" }, { name: "Celta de Vigo", short: "CEL" }, { name: "Getafe", short: "GET" },
+    { name: "Rayo Vallecano", short: "RAY" }, { name: "Mallorca", short: "MLL" }, { name: "Levante", short: "LEV" },
+    { name: "Elche", short: "ELC" }, { name: "Oviedo", short: "OVI" }, { name: "Alavés", short: "ALA" },
+    { name: "Osasuna", short: "OSA" }, { name: "Espanyol", short: "ESP" }
+  ] },
+  bundesliga: { id:"bundesliga", country:"Germany", label:"Bundesliga", file:"leagues/bundesliga.js", clubs:[
+    { name: "Bayern Munich", short: "FCB" }, { name: "Borussia Dortmund", short: "BVB" }, { name: "Bayer Leverkusen", short: "B04" },
+    { name: "RB Leipzig", short: "RBL" }, { name: "Eintracht Frankfurt", short: "SGE" }, { name: "VfB Stuttgart", short: "VFB" },
+    { name: "VfL Wolfsburg", short: "WOB" }, { name: "Werder Bremen", short: "SVW" }, { name: "TSG Hoffenheim", short: "TSG" },
+    { name: "Borussia Mönchengladbach", short: "BMG" }, { name: "Union Berlin", short: "FCU" }, { name: "FC Augsburg", short: "FCA" },
+    { name: "1. FC Köln", short: "KOE" }, { name: "SC Freiburg", short: "SCF" }, { name: "Mainz 05", short: "M05" },
+    { name: "Hamburger SV", short: "HSV" }, { name: "1. FC Heidenheim", short: "HDH" }, { name: "FC St. Pauli", short: "STP" }
+  ] },
+  seriea: { id:"seriea", country:"Italy", label:"Serie A", file:"leagues/serie-a.js", clubs:[
+    { name: "Napoli", short: "NAP" }, { name: "Juventus", short: "JUV" }, { name: "Inter Milan", short: "INT" },
+    { name: "AC Milan", short: "MIL" }, { name: "AS Roma", short: "ROM" }, { name: "Atalanta", short: "ATA" },
+    { name: "Lazio", short: "LAZ" }, { name: "Fiorentina", short: "FIO" }, { name: "Udinese", short: "UDI" },
+    { name: "Bologna", short: "BOL" }, { name: "Torino", short: "TOR" }, { name: "Sassuolo", short: "SAS" },
+    { name: "Como", short: "COM" }, { name: "Cremonese", short: "CRE" }, { name: "Lecce", short: "LEC" },
+    { name: "Parma", short: "PAR" }, { name: "Genoa", short: "GEN" }, { name: "Pisa", short: "PIS" },
+    { name: "Cagliari", short: "CAG" }, { name: "Hellas Verona", short: "VER" }
+  ] },
+  ligue1: { id:"ligue1", country:"France", label:"Ligue 1", file:"leagues/ligue-1.js", clubs:[
+    { name: "Paris Saint-Germain", short: "PSG" }, { name: "Lyon", short: "OL" }, { name: "Lille", short: "LIL" },
+    { name: "Monaco", short: "ASM" }, { name: "Lens", short: "LEN" }, { name: "Marseille", short: "OM" },
+    { name: "Nice", short: "NCE" }, { name: "Nantes", short: "NAN" }, { name: "Rennes", short: "REN" },
+    { name: "Strasbourg", short: "STR" }, { name: "Angers", short: "ANG" }, { name: "Auxerre", short: "AUX" },
+    { name: "Brest", short: "BRE" }, { name: "Le Havre", short: "HAC" }, { name: "Lorient", short: "LOR" },
+    { name: "Metz", short: "MET" }, { name: "Paris FC", short: "PFC" }, { name: "Toulouse", short: "TOU" }
+  ] }
+};
+
+// App state
+const state = { leagues:{}, pool:[], duration:5000, cycling:false };
+
+// UI refs (grab elements now that DOM exists)
+const clubPic = document.getElementById('clubPic');
+const clubName = document.getElementById('clubName');
+const clubLeague = document.getElementById('clubLeague');
+const selectedPreview = document.getElementById('selectedPreview');
+const randomBtn = document.getElementById('randomBtn');
+const openSettings = document.getElementById('openSettings');
+const settingsPanel = document.getElementById('settingsPanel');
+const leaguesContainer = document.getElementById('leaguesContainer');
+const durationRange = document.getElementById('durationRange');
+const durationLabel = document.getElementById('durationLabel');
+const applyBtn = document.getElementById('applyBtn');
+const closeSettings = document.getElementById('closeSettings');
+
+function initLeagues(){
+  Object.values(FALLBACK_LEAGUES).forEach(l => {
+    state.leagues[l.id] = { ...l, enabled: l.id !== "championship" };
+  });
+}
+
+// attempt to dynamically load external league JS files
+function tryLoadExternalLeagues(){
+  Object.values(state.leagues).forEach(league => {
+    if(!league.file) return;
+    const script = document.createElement('script');
+    script.src = league.file;
+    script.async = true;
+    script.onload = () => {
+      const varName = 'LEAGUE_' + league.id;
+      if(window[varName] && Array.isArray(window[varName])){
+        league.clubs = window[varName].map(c => ({...c}));
+        console.log('Loaded external league', league.id);
+        refreshUI();
+      }
+    };
+    script.onerror = () => {
+      // ignore, we'll use fallback clubs if present
+    };
+    document.head.appendChild(script);
+  });
+}
+
+// helper: SVG fallback image generator
+function svgDataForName(name){
+  const initials = (name||'').split(/\s+/).map(w=>w[0]).slice(0,2).join('').toUpperCase();
+  const bg = ['#ef4444','#f97316','#f59e0b','#10b981','#06b6d4','#3b82f6','#8b5cf6'][name.length % 7];
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'>
+    <defs><linearGradient id='g' x1='0' x2='1'><stop offset='0' stop-color='${bg}' stop-opacity='1'/><stop offset='1' stop-color='#0ea5a4' stop-opacity='0.9'/></linearGradient></defs>
+    <rect width='100%' height='100%' fill='url(#g)' rx='40' />
+    <text x='50%' y='55%' font-size='180' text-anchor='middle' font-family='Segoe UI, Roboto, Arial' fill='rgba(255,255,255,0.95)'>${initials}</text>
+  </svg>`;
+  return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+}
+
+function showClub(club){
+  clubName.textContent = club.name || 'Unknown Club';
+  clubLeague.textContent = club.league || '';
+  const imgUrl = club.image || club.logo || svgDataForName(club.name || 'Club');
+  clubPic.innerHTML = '';
+  const img = document.createElement('img');
+  img.alt = club.name || '';
+  img.src = imgUrl;
+  clubPic.appendChild(img);
+}
+
+function refreshUI(){
+  leaguesContainer.innerHTML = '';
+  const grouped = {};
+  Object.values(state.leagues).forEach(league=>{
+    if(!grouped[league.country]) grouped[league.country] = [];
+    grouped[league.country].push(league);
+  });
+  Object.entries(grouped).forEach(([country, leagues])=>{
+    const flagUrl = FLAGS[country] || '';
+    const countryDiv = document.createElement('div');
+    countryDiv.className = 'country-block';
+    countryDiv.innerHTML = `
+      <div class="country-header" tabindex="0" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:6px 0;">
+        <div style="display:flex;align-items:center;gap:8px;font-weight:600;">
+          <img src="${flagUrl}" alt="${country} flag" class="flag-icon" />
+          <span>${country}</span>
+        </div>
+        <span class="chevron" style="transition:transform 0.15s ease;">▼</span>
+      </div>
+      <div class="country-leagues" style="display:none;margin-left:18px;"></div>
+    `;
+    const leaguesList = countryDiv.querySelector('.country-leagues');
+    leagues.forEach(league=>{
+      const row = document.createElement('div');
+      row.className = 'league-row';
+      row.innerHTML = `
+        <label style="display:flex;align-items:center;gap:10px;width:100%;padding:4px 0;">
+          <input type="checkbox" data-id="${league.id}" ${league.enabled? 'checked':''} />
+          <div style="flex:1">
+            <div style="font-weight:500">${league.label}</div>
+            <div style="font-size:12px;color:var(--muted)">${league.clubs.length} clubs</div>
+          </div>
+        </label>
+      `;
+      leaguesList.appendChild(row);
+    });
+    leaguesContainer.appendChild(countryDiv);
+    const header = countryDiv.querySelector('.country-header');
+    const chevron = countryDiv.querySelector('.chevron');
+    header.addEventListener('click', ()=>{
+      if(leaguesList.style.display === 'none' || leaguesList.style.display === ''){
+        leaguesList.style.display = 'block';
+        chevron.style.transform = "rotate(180deg)";
+      } else {
+        leaguesList.style.display = 'none';
+        chevron.style.transform = "rotate(0deg)";
+      }
+    });
+    header.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        header.click();
+      }
+    });
+  });
+  leaguesContainer.querySelectorAll('input[type="checkbox"]').forEach(cb=>{
+    cb.addEventListener('change', e=>{
+      const id = e.target.dataset.id;
+      state.leagues[id].enabled = e.target.checked;
+      buildPool();
+    });
+  });
+  buildPool();
+}function buildPool(){
+  state.pool = [];
+  Object.values(state.leagues).forEach(l=>{
+    if(l.enabled && Array.isArray(l.clubs)){
+      l.clubs.forEach(c => state.pool.push({...c, league:l.label}));
+    }
+  });
+  updateQuicklist();
+}
+
+function updateQuicklist(){
+  selectedPreview.innerHTML = '';
+  const selectedLeagues = Object.values(state.leagues).filter(l=>l.enabled).map(l=>l.label);
+  if(selectedLeagues.length === 0){
+    selectedPreview.innerHTML = '<div class="pill">No leagues selected</div>';
+    return;
+  }
+  selectedLeagues.forEach(s=>{
+    const el = document.createElement('div');
+    el.className = 'pill';
+    el.textContent = s;
+    selectedPreview.appendChild(el);
+  });
+}
+
+function runRandomiser(){
+  if(state.cycling) return;
+  if(!state.pool.length){
+    alert('No clubs in the pool. Enable at least one league in settings.');
+    return;
+  }
+  state.cycling = true;
+  randomBtn.disabled = true;
+  randomBtn.classList.add('pulse');
+  const endTime = Date.now() + state.duration;
+  const interval = 80; // fast, consistent interval
+  const ticker = setInterval(()=>{
+    const idx = Math.floor(Math.random()*state.pool.length);
+    const current = state.pool[idx];
+    showClub(current);
+    if(Date.now() >= endTime){
+      clearInterval(ticker);
+      // final pick
+      const final = state.pool[Math.floor(Math.random()*state.pool.length)];
+      showClub(final);
+      state.cycling = false;
+      randomBtn.disabled = false;
+      randomBtn.classList.remove('pulse');
+    }
+  }, interval);
+}
+
+// wire UI
+function wire(){
+  randomBtn.addEventListener('click', runRandomiser);
+  openSettings.addEventListener('click', ()=>{ settingsPanel.style.display='block'; settingsPanel.setAttribute('aria-hidden','false'); });
+  closeSettings.addEventListener('click', ()=>{ settingsPanel.style.display='none'; settingsPanel.setAttribute('aria-hidden','true'); });
+  applyBtn.addEventListener('click', ()=>{ settingsPanel.style.display='none'; settingsPanel.setAttribute('aria-hidden','true'); });
+  durationRange.addEventListener('input', (e)=>{ const v = +e.target.value; state.duration = v*1000; durationLabel.textContent = v + 's'; });
+  durationLabel.textContent = (state.duration/1000) + 's';
+
+  // default preview image
+  clubPic.innerHTML = '';
+  const img = document.createElement('img'); img.src = svgDataForName('FR'); img.alt='FR'; clubPic.appendChild(img);
+
+  // ensure settings panel hidden initially
+  settingsPanel.style.display = 'none';
+  settingsPanel.setAttribute('aria-hidden','true');
+}
+
+
+// initialize app
+initLeagues();
+wire();
+refreshUI();
+tryLoadExternalLeagues();
+
+// expose for debugging
+window.FootballRandomiser = { state, showClub, buildPool, refreshUI };
+</script>
+</body>
+</html>
