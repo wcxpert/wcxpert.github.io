@@ -102,9 +102,9 @@ If an image is missing, the app will generate a **placeholder SVG** with the clu
 
   1. Push this repo to GitHub.
   2. Go to **Settings → Pages → Deploy from Branch → `main` branch**.
-  3. Your app will be live at `https://your-username.github.io/randomclub/`.
+  3. Your app will be live at `https://your-username.github.io/club/`.
 
-https://wcxpert.github.io/randomclub
+https://wcxpert.github.io/club
 
 ---
 
