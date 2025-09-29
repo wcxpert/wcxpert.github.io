@@ -1,0 +1,20 @@
+window.LEAGUE_eredivisie = [
+  { name: "Ajax", short: "AJA", image: "images/NED/ERE/ajax.png" },
+  { name: "AZ Alkmaar", short: "AZ", image: "images/NED/ERE/az.png" },
+  { name: "Excelsior", short: "EXC", image: "images/NED/ERE/excelsior.png" },
+  { name: "Feyenoord", short: "FEY", image: "images/NED/ERE/feyenoord.png" },
+  { name: "Fortuna Sittard", short: "FOR", image: "images/NED/ERE/fortuna.png" },
+  { name: "Go Ahead Eagles", short: "GAE", image: "images/NED/ERE/gae.png" },
+  { name: "Groningen", short: "GRO", image: "images/NED/ERE/groningen.png" },
+  { name: "Heerenveen", short: "HEE", image: "images/NED/ERE/heerenveen.png" },
+  { name: "Heracles Almelo", short: "HAL", image: "images/NED/ERE/heracles.png" },
+  { name: "NAC Breda", short: "NBR", image: "images/NED/ERE/nac.png" },
+  { name: "NEC Nijmegen", short: "NEC", image: "images/NED/ERE/nec.png" },
+  { name: "PEC Zwolle", short: "PZW", image: "images/NED/ERE/pec.png" },
+  { name: "PSV Eindhoven", short: "PSV", image: "images/NED/ERE/psv.png" },
+  { name: "Sparta Rotterdam", short: "SPA", image: "images/NED/ERE/sparta.png" },
+  { name: "Telstar", short: "TEL", image: "images/NED/ERE/telstar.png" },
+  { name: "Twente", short: "TWE", image: "images/NED/ERE/twente.png" },
+  { name: "Utrecht", short: "UTR", image: "images/NED/ERE/utrecht.png" },
+  { name: "Volendam", short: "VOL", image: "images/NED/ERE/volendam.png" }
+];

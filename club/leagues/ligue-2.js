@@ -1,0 +1,20 @@
+window.LEAGUE_ligue2 = [
+  { name: "Amiens", short: "AMI", image: "images/FRA/L2/amiens.png" },
+  { name: "Annecy", short: "ANN", image: "images/FRA/L2/annecy.png" },
+  { name: "Bastia", short: "BAS", image: "images/FRA/L2/bastia.png" },
+  { name: "Boulogne", short: "BOU", image: "images/FRA/L2/boulogne.png" },
+  { name: "Clermont", short: "CLE", image: "images/FRA/L2/clermont.png" },
+  { name: "Dunkerque", short: "DUN", image: "images/FRA/L2/dunkerque.png" },
+  { name: "Grenoble", short: "GRE", image: "images/FRA/L2/grenoble.png" },
+  { name: "Guingamp", short: "GUI", image: "images/FRA/L2/guingamp.png" },
+  { name: "Laval", short: "LAV", image: "images/FRA/L2/laval.png" },
+  { name: "Le Mans", short: "LEM", image: "images/FRA/L2/lemans.png" },
+  { name: "Montpellier", short: "MON", image: "images/FRA/L2/montpellier.png" },
+  { name: "Nancy", short: "NAN", image: "images/FRA/L2/nancy.png" },
+  { name: "Pau", short: "PAU", image: "images/FRA/L2/pau.png" },
+  { name: "Red Star", short: "RED", image: "images/FRA/L2/redstar.png" },
+  { name: "Reims", short: "REI", image: "images/FRA/L2/reims.png" },
+  { name: "Rodez", short: "ROD", image: "images/FRA/L2/rodez.png" },
+  { name: "Saint-Étienne", short: "STE", image: "images/FRA/L2/asse.png" },
+  { name: "Troyes", short: "TRO", image: "images/FRA/L2/troyes.png" }
+];

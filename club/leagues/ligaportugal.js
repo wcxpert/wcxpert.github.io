@@ -1,0 +1,20 @@
+window.LEAGUE_ligaportugal = [
+  { name: "Alverca", short: "ALV", image: "images/POR/LP/alverca.png" },
+  { name: "Arouca", short: "ARO", image: "images/POR/LP/arouca.png" },
+  { name: "AVS", short: "AVS", image: "images/POR/LP/avs.png" },
+  { name: "Benfica", short: "BEN", image: "images/POR/LP/benfica.png" },
+  { name: "Braga", short: "BRA", image: "images/POR/LP/braga.png" },
+  { name: "Estoril", short: "EST", image: "images/POR/LP/estoril.png" },
+  { name: "Casa Pia", short: "CAS", image: "images/POR/LP/casapia.png" },
+  { name: "Estrela de Amadora", short: "EST", image: "images/POR/LP/amadora.png" },
+  { name: "Famalicão", short: "FAM", image: "images/POR/LP/famalicao.png" },
+  { name: "Gil Vicente", short: "GIL", image: "images/POR/LP/gil.png" },
+  { name: "Moreirense", short: "MOR", image: "images/POR/LP/moreirense.png" },
+  { name: "Nacional", short: "NAC", image: "images/POR/LP/nacional.png" },
+  { name: "Porto", short: "POR", image: "images/POR/LP/porto.png" },
+  { name: "Sporting CP", short: "SPO", image: "images/POR/LP/sporting.png" },
+  { name: "Rio Ave", short: "RIO", image: "images/POR/LP/rioave.png" },
+  { name: "Santa Clara", short: "SAN", image: "images/POR/LP/santa.png" },
+  { name: "Vitória de Guimarães", short: "VIT", image: "images/POR/LP/vitoria.png" },
+  { name: "Tondela", short: "TON", image: "images/POR/LP/tondela.png" }
+];

@@ -1,0 +1,22 @@
+window.LEAGUE_serieb = [
+  { name: "Empoli", short: "EMP", image: "images/ITA/SE-B/empoli.png" },
+  { name: "Venezia", short: "VEN", image: "images/ITA/SE-B/venezia.png" },
+  { name: "Monza", short: "MON", image: "images/ITA/SE-B/monza.png" },
+  { name: "Padova", short: "PAD", image: "images/ITA/SE-B/padova.png" },
+  { name: "Avellino", short: "AVE", image: "images/ITA/SE-B/avellino.png" },
+  { name: "Virtus Entella", short: "VIR", image: "images/ITA/SE-B/virtus.png" },
+  { name: "Pescara", short: "PES", image: "images/ITA/SE-B/pescara.png" },
+  { name: "Cesena", short: "CES", image: "images/ITA/SE-B/cesena.png" },
+  { name: "Frosinone", short: "FRO", image: "images/ITA/SE-B/frosinone.png" },
+  { name: "Catanzaro", short: "CAT", image: "images/ITA/SE-B/catanzaro.png" },
+  { name: "Modena", short: "MOD", image: "images/ITA/SE-B/modena.png" },
+  { name: "Juve Stabia", short: "JST", image: "images/ITA/SE-B/stabia.png" },
+  { name: "Mantova", short: "MAN", image: "images/ITA/SE-B/mantova.png" },
+  { name: "Reggiana", short: "REG", image: "images/ITA/SE-B/reggiana.png" },
+  { name: "Südtirol", short: "SÜD", image: "images/ITA/SE-B/sudtirol.png" },
+  { name: "Palermo", short: "PAL", image: "images/ITA/SE-B/palermo.png" },
+  { name: "Bari", short: "BAR", image: "images/ITA/SE-B/bari.png" },
+  { name: "Spezia", short: "SPE", image: "images/ITA/SE-B/spezia.png" },
+  { name: "Carrarese", short: "CAR", image: "images/ITA/SE-B/carrarese.png" },
+  { name: "Sampdoria", short: "SAM", image: "images/ITA/SE-B/sampdoria.png" }
+];
