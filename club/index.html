@@ -349,14 +349,45 @@ const FALLBACK_LEAGUES = {
   eredivisie: { id:"eredivisie", country:"Netherlands", label:"Eredivisie", file:"leagues/eredivisie.js", clubs:[], enabled:false },
   superlig: { id:"superlig", country:"Türkiye", label:"Süper Lig", file:"leagues/superlig.js", clubs:[], enabled:false }
 };
-
-// App state
 const state = { leagues:{}, pool:[], duration:5000, cycling:false, cycleSpeed:80 };
 
-function svgDataForName(name){
-  const initials = (name||'').split(/\s+/).map(w=>w[0]).slice(0,2).join('').toUpperCase();
-  const bg = ['#ef4444','#f97316','#f59e0b','#10b981','#06b6d4','#3b82f6','#8b5cf6'][name.length % 7];
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><rect width='100%' height='100%' fill='${bg}' rx='40' /><text x='50%' y='55%' font-size='180' text-anchor='middle' font-family='Segoe UI, Roboto, Arial' fill='rgba(255,255,255,0.95)'>${initials}</text></svg>`;
+function svgDataForName(name, textOverride){
+  const initials = textOverride || (name||'')
+    .split(/\s+/)
+    .map(w=>w[0])
+    .slice(0,2)
+    .join('')
+    .toUpperCase();
+
+  // da boom "?" placeholder
+  if (initials === "?") {
+    const muted = getComputedStyle(document.documentElement)
+      .getPropertyValue('--muted')
+      .trim() || '#94a3b8';
+
+    const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'>
+      <text x='50%' y='50%' font-size='180' text-anchor='middle'
+        dominant-baseline="middle"
+        font-family='Segoe UI, Roboto, Arial' fill='${muted}'>?</text>
+    </svg>`;
+    return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+  }
+
+  // dynamic font size: 1–2 letters = big, 3 = medium, 4+ = smaller
+  let fontSize = 180;
+  if (initials.length === 3) fontSize = 150;
+  if (initials.length >= 4) fontSize = 120;
+
+    const accent = getComputedStyle(document.documentElement)
+    .getPropertyValue('--accent')
+    .trim() || '#10b981';
+
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'>
+    <rect width='100%' height='100%' fill='${accent}' rx='40' />
+    <text x='50%' y='50%' font-size='${fontSize}' text-anchor='middle'
+      dominant-baseline="middle"
+      font-family='Segoe UI, Roboto, Arial' fill='rgba(255,255,255,0.95)'>${initials}</text>
+  </svg>`;
   return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
 }
 
@@ -365,9 +396,12 @@ function showClub(club){
   const clubLeague = document.getElementById('clubLeague');
   const clubPic = document.getElementById('clubPic');
   if(!clubName || !clubPic) return;
+
   clubName.textContent = club.name || 'Unknown Club';
   clubLeague.textContent = club.league || '';
-  const imgUrl = club.image || club.logo || svgDataForName(club.name || 'Club');
+
+  const imgUrl = club.image || club.logo || svgDataForName(club.name || 'Club', club.short);
+  
   clubPic.innerHTML = '';
   const img = document.createElement('img');
   img.alt = club.name || '';
@@ -639,8 +673,19 @@ window.addEventListener('DOMContentLoaded', () => {
   if(prefDurationLabel) prefDurationLabel.textContent = (+savedDuration) + 's';
   if(cycleSpeedRange) cycleSpeedRange.value = +savedSpeed;
   if(themeSelect) themeSelect.value = savedTheme;
-  if(specialPopup && Math.random() < 0) { specialPopup.style.display = 'flex'; }
-  // hey me, refer to ts when i finish the cl website ver n set it to point 1
+ 
+const popup1 = document.getElementById('specialPopup');
+const popup2 = document.getElementById('imagePopup');
+
+const roll = Math.random();
+if (roll < 0.0) {
+  if (Math.random() < 0.5 && popup1) {
+    popup1.style.display = 'flex';
+  } else if (popup2) {
+    popup2.style.display = 'flex';
+  }
+}
+  // note reminder to me to change it
   initLeagues();
   refreshUI();
   wire();
@@ -658,10 +703,20 @@ window.addEventListener('DOMContentLoaded', () => {
   <div class="rgt"></div>
 </div>
 
-    // coming soon man
+   
     <h2 class="popup-title">Champions Leagues Edition</h2>
     <p class="popup-desc">Check out our random picker for the UEFA and AFC Champions Leagues with extras!</p>
-    <button class="btn btn-random" onclick="window.location.href='https://wcxpert.github.io/club/cl/'">Click Me</button>
+    <button class="btn btn-random" onclick="window.location.href='cl/index.html'">Explore</button>
+  </div>
+</div>
+  <!-- New Image Popup -->
+<div id="imagePopup" class="popup-overlay" style="display:none;">
+  <div class="popup-card">
+    <button class="popup-close" onclick="document.getElementById('imagePopup').style.display='none'">&times;</button>
+    <img src="images/extra/earth.png" alt="Special Promo" class="popup-img">
+    <h2 class="popup-title">International Edition</h2>
+    <p class="popup-desc">Discover random clubs from Argentina, Brazil, Saudi Arabia and more!</p>
+    <button class="btn btn-random" onclick="window.location.href='intl/index.html'">Explore</button>
   </div>
 </div>
   <div id="prefPopup" class="popup-overlay" style="display:none;">
@@ -675,7 +730,6 @@ window.addEventListener('DOMContentLoaded', () => {
     <div style="text-align:left; margin-top:12px;">
       <label for="themeSelect">Theme:</label>
       <select id="themeSelect">
-        // pretty colors :0
   <option value="default">Default Dark</option>
   <option value="light">Default Light</option>
   <option value="green">Pitch Green</option>
@@ -698,6 +752,5 @@ window.addEventListener('DOMContentLoaded', () => {
     </div>
   </div>
 </div>
-
 </body>
 </html>
