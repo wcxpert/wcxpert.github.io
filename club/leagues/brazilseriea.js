@@ -1,0 +1,22 @@
+window.LEAGUE_brazilseriea = [
+  { name: "Atlético Mineiro", short: "CAM", image: "images/BR/SE-A/atletico.png" },
+  { name: "Bahia", short: "BAH", image: "images/BR/SE-A/bahia.png" },
+  { name: "Botafogo", short: "BOT", image: "images/BR/SE-A/botafogo.png" },
+  { name: "Ceará", short: "CEA", image: "images/BR/SE-A/ceara.png" },
+  { name: "Corinthians", short: "COR", image: "images/BR/SE-A/corinthians.png" },
+  { name: "Cruzeiro", short: "CRU", image: "images/BR/SE-A/cruzeiro.png" },
+  { name: "Flamengo", short: "FLA", image: "images/BR/SE-A/flamengo.png" },
+  { name: "Fluminense", short: "FLU", image: "images/BR/SE-A/fluminense.png" },
+  { name: "Fortaleza", short: "FOR", image: "images/BR/SE-A/fortaleza.png" },
+  { name: "Grêmio", short: "GRE", image: "images/BR/SE-A/gremio.png" },
+  { name: "Internacional", short: "INT", image: "images/BR/SE-A/internacional.png" },
+  { name: "Juventude", short: "JUV", image: "images/BR/SE-A/juventude.png" },
+  { name: "Mirassol", short: "MIR", image: "images/BR/SE-A/mirassol.png" },
+  { name: "Palmeiras", short: "PAL", image: "images/BR/SE-A/palmeiras.png" },
+  { name: "Red Bull Bragantino", short: "RBB", image: "images/BR/SE-A/rb.png" },
+  { name: "Santos", short: "SAN", image: "images/BR/SE-A/santos.png" },
+  { name: "São Paulo", short: "SAO", image: "images/BR/SE-A/saopaulo.png" },
+  { name: "Sport Recife", short: "SPT", image: "images/BR/SE-A/sport.png" },
+  { name: "Vasco da Gama", short: "VAS", image: "images/BR/SE-A/vasco.png" },
+  { name: "Vitória", short: "VIT", image: "images/BR/SE-A/vitoria.png" }
+];

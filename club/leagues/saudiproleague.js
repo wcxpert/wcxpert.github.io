@@ -1,0 +1,20 @@
+window.LEAGUE_saudiproleague = [
+  { name: "Al-Ahli", short: "AHL", image: "images/SAU/SPL/ahli.png" },
+  { name: "Al-Ettifaq", short: "ETF", image: "images/SAU/SPL/ettifaq.png" },
+  { name: "Al-Fateh", short: "FTH", image: "images/SAU/SPL/fateh.png" },
+  { name: "Al-Fayha", short: "FYH", image: "images/SAU/SPL/fayha.png" },
+  { name: "Al-Hazem", short: "HZM", image: "images/SAU/SPL/hazem.png" },
+  { name: "Al-Hilal", short: "HIL", image: "images/SAU/SPL/hilal.png" },
+  { name: "Al-Ittihad", short: "ITT", image: "images/SAU/SPL/ittihad.png" },
+  { name: "Al-Khaleej", short: "KHL", image: "images/SAU/SPL/khaleej.png" },
+  { name: "Al-Kholood", short: "KHD", image: "images/SAU/SPL/kholood.png" },
+  { name: "Al-Najma", short: "NJM", image: "images/SAU/SPL/najma.png" },
+  { name: "Al-Nassr", short: "NAS", image: "images/SAU/SPL/nassr.png" },
+  { name: "Al-Okhdood", short: "OKD", image: "images/SAU/SPL/okhdood.png" },
+  { name: "Al-Qadsiah", short: "QAD", image: "images/SAU/SPL/qadsiah.png" },
+  { name: "Al-Riyadh", short: "RDH", image: "images/SAU/SPL/riyadh.png" },
+  { name: "Al-Shabab", short: "SHB", image: "images/SAU/SPL/shabab.png" },
+  { name: "Al-Taawoun", short: "TAW", image: "images/SAU/SPL/taawoun.png" },
+  { name: "Damac", short: "DAM", image: "images/SAU/SPL/damac.png" },
+  { name: "Neom", short: "NEO", image: "images/SAU/SPL/neom.png" }
+];

@@ -1,0 +1,22 @@
+window.LEAGUE_jleague = [
+  { name: "Albirex Niigata", short: "ALB", image: "images/JAP/J1/albirex.png" },
+  { name: "Avispa Fukuoka", short: "AVI", image: "images/JAP/J1/avispa.png" },
+  { name: "Cerezo Osaka", short: "CER", image: "images/JAP/J1/cerezo.png" },
+  { name: "Fagiano Okayama", short: "FAG", image: "images/JAP/J1/fagiano.png" },
+  { name: "FC Tokyo", short: "FCT", image: "images/JAP/J1/tokyo.png" },
+  { name: "Gamba Osaka", short: "GAM", image: "images/JAP/J1/gamba.png" },
+  { name: "Kashima Antlers", short: "KAS", image: "images/JAP/J1/kashima.png" },
+  { name: "Kashiwa Reysol", short: "KRY", image: "images/JAP/J1/kashiwa.png" },
+  { name: "Kawasaki Frontale", short: "KAW", image: "images/JAP/J1/kawasaki.png" },
+  { name: "Kyoto Sanga", short: "KYO", image: "images/JAP/J1/kyoto.png" },
+  { name: "Machida Zelvia", short: "MAC", image: "images/JAP/J1/machida.png" },
+  { name: "Nagoya Grampus", short: "NAG", image: "images/JAP/J1/nagoya.png" },
+  { name: "Sanfrecce Hiroshima", short: "SAN", image: "images/JAP/J1/sanfrecce.png" },
+  { name: "Shimizu S-Pulse", short: "SHI", image: "images/JAP/J1/shimizu.png" },
+  { name: "Shonan Bellmare", short: "SHO", image: "images/JAP/J1/shonan.png" },
+  { name: "Tokyo Verdy", short: "VER", image: "images/JAP/J1/verdy.png" },
+  { name: "Urawa Red Diamonds", short: "URA", image: "images/JAP/J1/urawa.png" },
+  { name: "Vissel Kobe", short: "VIS", image: "images/JAP/J1/vissel.png" },
+  { name: "Yokohama F. Marinos", short: "YFM", image: "images/JAP/J1/yokohamafm.png" },
+  { name: "Yokohama FC", short: "YFC", image: "images/JAP/J1/yokohamafc.png" }
+];
