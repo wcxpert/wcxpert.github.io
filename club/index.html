@@ -4,12 +4,12 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>Club Picker</title>
-<link rel="icon" type="image/png" href="/images/icon/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/images/icon/favicon.svg" />
-<link rel="shortcut icon" href="/images/icon/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/images/icon/apple-touch-icon.png" />
+<link rel="icon" type="image/png" href="images/icon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="images/icon/favicon.svg" />
+<link rel="shortcut icon" href="images/icon/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="images/icon/apple-touch-icon.png" />
 <meta name="apple-mobile-web-app-title" content="Club Picker" />
-<link rel="manifest" href="/images/icon/site.webmanifest" />
+<link rel="manifest" href="images/icon/site.webmanifest" />
 <link rel="stylesheet" href="themes.css">
 <style>
   :root {
@@ -19,9 +19,12 @@
     --accent: #10b981;
   }
   
-  #settingsPanel {
+#settingsPanel[aria-hidden="true"] {
   display: none;
-  }
+}
+#settingsPanel[aria-hidden="false"] {
+  display: block;
+}
 
   body {
     margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;
@@ -138,11 +141,7 @@
   
 .preview,
 .settings-panel,
-.socials-box {
-  width: 360px;
-  max-width: 100%;
-  
-}
+.socials-box { width: 360px; max-width: 100%; }
 
 .popup-overlay {
   position: fixed;
@@ -160,7 +159,7 @@
   border-radius: 14px;
   padding: 24px;
   text-align: center;
-  width: 360px; /* same as your other boxes */
+  width: 360px; /* same as my other boxes ^^ */
   box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 }
 
@@ -267,6 +266,7 @@
 </div>
 <div class="muted" style="margin-top:8px"> </div>
 </aside>
+
 <section class="card socials-box">
   <h2 style="margin-top:0">Follow Me</h2>
   <div style="display:flex; gap:12px; justify-content:center; margin-top:8px;">
@@ -291,7 +291,16 @@ const FLAGS = {
   France: "flags/FRA.png",
   Portugal: "flags/POR.png",
   Netherlands: "flags/NED.png",
-  Türkiye: "flags/TUR.png"
+  Türkiye: "flags/TUR.png",
+  USA: "flags/USA.png",
+  Belgium: "flags/BEL.png",
+  Brazil: "flags/BR.png",
+  "Saudi Arabia": "flags/SAU.png",
+  Japan: "flags/JAP.png",
+  Mexico: "flags/MEX.png",
+  Argentina: "flags/ARG.png",
+  "South Korea": "flags/KOR.png",
+  China: "flags/CH.png"
 };
 
 const FALLBACK_LEAGUES = {
@@ -345,10 +354,19 @@ const FALLBACK_LEAGUES = {
     { name: "Metz", short: "MET" }, { name: "Paris FC", short: "PFC" }, { name: "Toulouse", short: "TOU" }
   ] },
   ligue2: { id:"ligue2", country:"France", label:"Ligue 2", file:"leagues/ligue-2.js", clubs:[], enabled:false },
+  proleague: { id:"proleague", country:"Belgium", label:"Belgian Pro League", file:"leagues/proleague.js", clubs:[], enabled:false },
   ligaportugal: { id:"ligaportugal", country:"Portugal", label:"Liga Portugal", file:"leagues/ligaportugal.js", clubs:[], enabled:false },
+  jleague: { id:"jleague", country:"Japan", label:"J1 League", file:"leagues/jleague.js", clubs:[], enabled:false },
+  saudiproleague: { id:"saudiproleague", country:"Saudi Arabia", label:"Saudi Pro League", file:"leagues/saudiproleague.js", clubs:[], enabled:false },
+  brazilseriea: { id:"brazilseriea", country:"Brazil", label:"Série A", file:"leagues/brazilseriea.js", clubs:[], enabled:false },
+  ligamx: { id:"ligamx", country:"Mexico", label:"Liga MX", file:"leagues/ligamx.js", clubs:[], enabled:false },
+  mls: { id:"mls", country:"USA", label:"Major League Soccer", file:"leagues/mls.js", clubs:[], enabled:false },
   eredivisie: { id:"eredivisie", country:"Netherlands", label:"Eredivisie", file:"leagues/eredivisie.js", clubs:[], enabled:false },
-  superlig: { id:"superlig", country:"Türkiye", label:"Süper Lig", file:"leagues/superlig.js", clubs:[], enabled:false }
-};
+  ligaprofesional: { id:"ligaprofesional", country:"Argentina", label:"Liga Profesional", file:"leagues/ligaprofesional.js", clubs:[], enabled:false },
+  kleague: { id:"kleague", country:"South Korea", label:"K-League 1", file:"leagues/kleague.js", clubs:[], enabled:false },
+  superlig: { id:"superlig", country:"Türkiye", label:"Süper Lig", file:"leagues/superlig.js", clubs:[], enabled:false },
+  csl: { id:"csl", country:"China", label:"Chinese Super League", file:"leagues/csl.js", clubs:[], enabled:false }
+  };
 const state = { leagues:{}, pool:[], duration:5000, cycling:false, cycleSpeed:80 };
 
 function svgDataForName(name, textOverride){
@@ -571,8 +589,12 @@ function wire(){
   const prefPopup = document.getElementById('prefPopup');
 
   if(randomBtn) randomBtn.addEventListener('click', runRandomiser);
-  if(openSettings) openSettings.addEventListener('click', ()=>{ if(settingsPanel){ settingsPanel.style.display='block'; settingsPanel.setAttribute('aria-hidden','false'); }});
-  if(closeSettings) closeSettings.addEventListener('click', ()=>{ if(settingsPanel){ settingsPanel.style.display='none'; settingsPanel.setAttribute('aria-hidden','true'); }});
+  if(openSettings) openSettings.addEventListener('click', ()=>{
+  if(settingsPanel) settingsPanel.setAttribute('aria-hidden','false');
+});
+if(closeSettings) closeSettings.addEventListener('click', ()=>{
+  if(settingsPanel) settingsPanel.setAttribute('aria-hidden','true');
+});
   if(prefBtn && prefPopup) prefBtn.addEventListener('click', () => { prefPopup.style.display = 'flex'; });
 
   // default prev
@@ -677,15 +699,32 @@ window.addEventListener('DOMContentLoaded', () => {
 const popup1 = document.getElementById('specialPopup');
 const popup2 = document.getElementById('imagePopup');
 
-const roll = Math.random();
-if (roll < 0.0) {
-  if (Math.random() < 0.5 && popup1) {
-    popup1.style.display = 'flex';
-  } else if (popup2) {
-    popup2.style.display = 'flex';
-  }
+
+  // note
+  const resetBtn = document.getElementById("resetPrefs");
+if (resetBtn) {
+  resetBtn.addEventListener("click", () => {
+    // clear saved prefs
+    localStorage.removeItem("clubTheme");
+    localStorage.removeItem("clubDuration");
+    localStorage.removeItem("clubSpeed");
+
+    // reset state
+    state.duration = 5000;
+    state.cycleSpeed = 80;
+    document.body.className = "";
+    document.body.classList.add("theme-default");
+
+    // reset UI elements
+    document.getElementById("prefDurationRange").value = 5;
+    document.getElementById("prefDurationLabel").textContent = "5s";
+    document.getElementById("cycleSpeedRange").value = 80;
+    document.getElementById("themeSelect").value = "default";
+  });
 }
-  // note reminder to me to change it
+
+    if (newsPopup && Math.random() < 1) { newsPopup.style.display = 'flex'; }
+  // note, reminder to me to change it
   initLeagues();
   refreshUI();
   wire();
@@ -693,16 +732,25 @@ if (roll < 0.0) {
   tryLoadExternalLeagues();
 });
 </script>
-
+  
+<div id="newsPopup" class="popup-overlay" style="display:none;">
+  <div class="popup-card">
+    <button class="popup-close" onclick="document.getElementById('newsPopup').style.display='none'">&times;</button>
+    <img src="images/extra/earth.png" class="popup-img">
+    <h2 class="popup-title">Latest Update</h2>
+    <p class="popup-desc">New leagues: MLS, Saudi Pro League, CSL, Belgian Pro League and some more 👀</p>
+    <button class="btn btn-random" onclick="document.getElementById('newsPopup').style.display='none'">OK</button>
+  </div>
+</div>
+  
 <div id="specialPopup" class="popup-overlay" style="display:none;">
   <div class="popup-card">
     <button class="popup-close" onclick="document.getElementById('specialPopup').style.display='none'">&times;</button>
-    <!-- diagonal combined imag -->
+    <!-- le diagonal combined imag -->
 <div class="con popup-img">
   <div class="lft"></div>
   <div class="rgt"></div>
 </div>
-
    
     <h2 class="popup-title">Champions Leagues Edition</h2>
     <p class="popup-desc">Check out our random picker for the UEFA and AFC Champions Leagues with extras!</p>
@@ -713,9 +761,9 @@ if (roll < 0.0) {
 <div id="imagePopup" class="popup-overlay" style="display:none;">
   <div class="popup-card">
     <button class="popup-close" onclick="document.getElementById('imagePopup').style.display='none'">&times;</button>
-    <img src="images/extra/earth.png" alt="Special Promo" class="popup-img">
+    <img src="images/extra/earth.png" class="popup-img">
     <h2 class="popup-title">International Edition</h2>
-    <p class="popup-desc">Discover random clubs from Argentina, Brazil, Saudi Arabia and more!</p>
+    <p class="popup-desc">Generate random clubs from the USA, Saudi Arabia, Brazil and more!</p>
     <button class="btn btn-random" onclick="window.location.href='intl/index.html'">Explore</button>
   </div>
 </div>
@@ -749,6 +797,10 @@ if (roll < 0.0) {
     <div style="text-align:left; margin-top:12px;">
       <label>Cycle Animation Speed</label>
       <input id="cycleSpeedRange" type="range" min="50" max="300" value="80" />
+    </div>
+
+    <div style="margin-top:16px; display:flex; justify-content:center;">
+      <button class="btn btn-settings" id="resetPrefs">Reset</button>
     </div>
   </div>
 </div>
