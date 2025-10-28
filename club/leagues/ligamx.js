@@ -1,0 +1,20 @@
+window.LEAGUE_ligamx = [
+  { name: "América", short: "AME", image: "images/MEX/LMX/america.png" },
+  { name: "Atlas", short: "ATL", image: "images/MEX/LMX/atlas.png" },
+  { name: "Atlético San Luis", short: "ASL", image: "images/MEX/LMX/sanluis.png" },
+  { name: "Cruz Azul", short: "CAZ", image: "images/MEX/LMX/cruzazul.png" },
+  { name: "Guadalajara", short: "GUA", image: "images/MEX/LMX/guadalajara.png" },
+  { name: "Juárez", short: "JUA", image: "images/MEX/LMX/juarez.png" },
+  { name: "León", short: "LEO", image: "images/MEX/LMX/leon.png" },
+  { name: "Mazatlán", short: "MAZ", image: "images/MEX/LMX/mazatlan.png" },
+  { name: "Monterrey", short: "MTY", image: "images/MEX/LMX/monterrey.png" },
+  { name: "Necaxa", short: "NEC", image: "images/MEX/LMX/necaxa.png" },
+  { name: "Pachuca", short: "PAC", image: "images/MEX/LMX/pachuca.png" },
+  { name: "Puebla", short: "PUE", image: "images/MEX/LMX/puebla.png" },
+  { name: "Querétaro", short: "QUE", image: "images/MEX/LMX/queretaro.png" },
+  { name: "Santos Laguna", short: "SAN", image: "images/MEX/LMX/santos.png" },
+  { name: "Tijuana", short: "TIJ", image: "images/MEX/LMX/tijuana.png" },
+  { name: "Deportivo Toluca", short: "TOL", image: "images/MEX/LMX/toluca.png" },
+  { name: "Tigres UANL", short: "TIG", image: "images/MEX/LMX/tigres.png" },
+  { name: "Universidad Nacional", short: "PUM", image: "images/MEX/LMX/pumas-unam.png" }
+];
