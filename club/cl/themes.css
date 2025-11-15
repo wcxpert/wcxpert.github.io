@@ -1,0 +1,107 @@
+@font-face {
+  font-family: 'UCLFont';
+  src: url('UCLFont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'UELFont';
+  src: url('UELFont.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CopaFont';
+  src: url('CopaFont.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AFCFont';
+  src: url('AFCFont.ttf') format('truetype');
+  font-display: swap;
+}
+
+/* UEFA Champions League */
+.ucl-theme {
+  --bg: #020830;
+  --card: linear-gradient(135deg, #0b1e85 0%, #1f4ed8 60%, #4fa3ff 100%);
+  --muted: #bfc9ff;
+  --accent: #ffffff;
+  --font-family: 'UCLFont', sans-serif;
+  --glow: rgba(64, 128, 255, 0.6);
+}
+
+/* UEFA Europa League */
+.uel-theme {
+  --bg: #050505;
+  --card: linear-gradient(135deg, #ff6900 0%, #ff6900 100%);
+  --muted: #c7c7c7;
+  --accent: #ff6900;
+  --font-family: 'UELFont', sans-serif;
+  --glow: rgba(255, 105, 0, 0.7);
+}
+
+/* UEFA Conference League */
+.uecl-theme {
+  --bg: #050505;
+  --card: linear-gradient(135deg, #00b21b 0%, #00b21b 100%);
+  --muted: #c7c7c7;
+  --accent: #09ff00;
+  --font-family: 'UELFont', sans-serif;
+  --glow: rgba(0, 178, 27, 0.7);
+}
+
+/* Copa Libertadores */
+.copalib-theme {
+  --bg: #080808;
+  --card: linear-gradient(135deg, #94631f 0%, #f5c84a 50%, #94631f 100%);
+  --muted: #d0d0d0;
+  --accent: #ffd700;
+  --font-family: 'CopaFont', sans-serif;
+  --glow: rgba(245, 200, 74, 0.65); /* gold inner glow */
+}
+
+/* Copa Sudamericana */
+.copasud-theme {
+  --bg: #0b0c10;
+  --card: linear-gradient(135deg, #001f5b 0%, #00b4ff 100%);
+  --muted: #c5c5c5;
+  --accent: #00aaff;
+  --font-family: 'CopaFont', sans-serif;
+  --glow: rgba(0, 180, 255, 0.55); /* blue glow */
+}
+
+/* AFC Champions League */
+.afcElite-theme {
+  --bg: #1c0041;
+  --card: linear-gradient(135deg, #5f418a 0%, #9f89cc 50%, #5f418a 100%);
+  --muted: #cccccc;
+  --accent: #8f00ff;
+  --font-family: 'AFCFont', sans-serif;
+  --glow: rgba(166, 146, 221, 0.7);
+}
+
+body {
+  background-color: var(--bg);
+  color: #fff;
+  font-family: var(--font-family);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.card, .club-card, .popup-card {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 0 15px rgba(0,0,0,0.25);
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.muted {
+  color: var(--muted);
+}
