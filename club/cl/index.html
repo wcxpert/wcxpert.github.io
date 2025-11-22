@@ -1,1 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Club Picker (Continental)</title>
+<link rel="icon" type="image/png" href="images/icon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="images/icon/favicon.svg" />
+<link rel="shortcut icon" href="images/icon/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="images/icon/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="Club Picker Continental" />
+<link rel="manifest" href="images/icon/site.webmanifest" />
+<link rel="stylesheet" href="themes.css">
+<style>
+:root {
+    --bg: #0f1724;
+    --card: linear-gradient(135deg,#0ea5a4 0%, #6366f1 100%);
+    --muted: #94a3b8;
+    --accent: #10b981;
+}
+#settingsPanel[aria-hidden="true"] {
+  display: none;
+}
+#settingsPanel[aria-hidden="false"] {
+  display: block;
+}
+body {
+    margin:0;font-family: var(--font-family);
+    background: var(--bg);
+    color:#e6eef8;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px
+}
+.logo, .card, .club-name, .club-sub {
+  font-family: var(--font-family);
+}
+.app {
+    width:980px;max-width:96%;background:radial-gradient(800px 400px at 10% 10%, rgba(99,102,241,0.06), transparent 10%), radial-gradient(600px 300px at 90% 90%, rgba(16,185,129,0.03), transparent 10%), rgba(7,17,36,0.6);
+    border-radius:18px;padding:24px;box-shadow:0 10px 30px rgba(2,6,23,0.7);backdrop-filter: blur(6px);border:1px solid rgba(255,255,255,0.035)
+}
+header {display:flex;align-items:center;gap:16px;margin-bottom:18px}
+.logo {
+    width:60px;height:60px;border-radius:12px;
+    background: var(--card);
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;color:white;box-shadow:0 6px 18px rgba(99,102,241,0.12)
+}
+h1{font-size:20px;margin:0}
+p.lead{margin:0;color:var(--muted);font-size:13px}
+.grid {display: flex;flex-direction: column;align-items: center;gap: 18px;}
+.card {background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+.preview{display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px}
+.club-pic{width:220px;height:220px;border-radius:16px;background:var(--glass);display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
+.club-pic img{width:100%;height:100%;object-fit:cover}
+.club-name{text-align:center;font-weight:600;font-size:18px;margin-top:6px}
+.club-sub{color:var(--muted);font-size:13px;margin-top:4px}
+.controls{display:flex;flex-direction:column;gap:12px;width:100%}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:10px;font-weight:600;border:none;cursor:pointer}
+.btn-random{background:var(--card);color:white;box-shadow:0 8px 30px rgba(99,102,241,0.18);transform:translateY(0);transition:transform .12s}
+.btn-random:active{transform:translateY(2px)}
+.btn-settings{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
 
+    .quicklist{display:flex;gap:8px;flex-wrap:wrap}
+    .pill{background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted);border:1px solid rgba(255,255,255,0.02)}
+
+    .settings-panel{display:flex;flex-direction:column;gap:12px}
+    .league-row{display:flex;align-items:center;gap:12px}
+    .league-row input{width:18px;height:18px}
+    .muted{color:var(--muted);font-size:13px}
+
+    footer{margin-top:16px;display:flex;justify-content:space-between;align-items:center}
+    .small{color:var(--muted);font-size:13px}
+
+    @media (max-width:880px){.grid{grid-template-columns:1fr;}.club-pic{width:180px;height:180px}}
+   
+.flag-icon {
+  width: 20px;
+  height: 14px;
+  object-fit: cover;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.country-header:hover {
+  background: rgba(255,255,255,0.04);
+  border-radius: 6px;
+}
+.country-block {
+  background: rgba(255,255,255,0.02);
+  border-radius: 8px;
+  margin: 8px 0;
+  padding: 6px 10px;
+}
+
+.country-header { user-select:none; }
+.country-header:focus { outline:none; }
+
+.randomiser-box {
+  background: rgba(255,255,255,0.02);
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+}
+  
+.club-pic img {
+  width: 135px;
+  height: 135px;
+  border-radius: 14px;
+  margin-bottom: 10px;
+}
+
+.club-name {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.club-league {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+  
+.preview,
+.settings-panel,
+.socials-box { width: 360px; max-width: 100%; }
+
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.popup-card {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  border-radius: 14px;
+  padding: 24px;
+  text-align: center;
+  width: 360px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+.popup-img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.popup-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.popup-desc {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.popup-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+}
+
+.con {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lft {
+  position: absolute;
+  inset: 0;
+  background: url("images/extra/left.png") no-repeat center/contain;
+  background-size: cover;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.rgt {
+  position: absolute;
+  inset: 0;
+  background: url("images/extra/right.png") no-repeat center/contain;
+  background-size: cover;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+  
+.app, .card {
+  transition: background 0.5s ease, color 0.5s ease;
+}
+  
+.site-author {
+  font-family: 'CopaFont', sans-serif !important;
+}
+  
+.club-pic {
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+  position: relative;
+  align-items: center;
+  width: 140px;
+  height: 140px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.04);
+  padding: 12px;
+  transition: box-shadow 0.3s ease, background 0.3s ease;
+  box-shadow: inset 0 0 0 rgba(0,0,0,0);
+}
+
+.club-pic img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 3px rgba(0,0,0,0.4));
+  transition: all 0.3s ease;
+}
+
+.logo-glow-ucl {
+  text-shadow:
+    0 0 6px rgba(70, 130, 255, 0.9),
+    0 0 14px rgba(90, 160, 255, 0.8),
+    0 0 28px rgba(120, 190, 255, 0.6);
+}
+.logo-glow-uel {
+  text-shadow:
+    0 0 6px rgba(255, 105, 0, 0.9),
+    0 0 14px rgba(255, 105, 0, 0.8),
+    0 0 28px rgba(255, 105, 0, 0.6);
+}
+.logo-glow-uecl {
+  text-shadow:
+    0 0 6px rgba(0, 178, 27, 0.9),
+    0 0 14px rgba(0, 178, 27, 0.8),
+    0 0 28px rgba(0, 178, 27, 0.6);
+}
+.logo-glow-copalib {
+  text-shadow:
+    0 0 6px rgba(148, 99, 31, 0.9),
+    0 0 14px rgba(148, 99, 31, 0.8),
+    0 0 28px rgba(148, 99, 31, 0.6);
+}
+.logo-glow-copasud {
+  text-shadow: 0 0 6px rgba(0,180,255,0.8), 0 0 12px rgba(0,180,255,0.6);
+}
+.logo-glow-afcElite {
+  text-shadow:
+    0 0 6px rgba(166, 146, 221, 0.9),
+    0 0 14px rgba(166, 146, 221, 0.8),
+    0 0 28px rgba(166, 146, 221, 0.6);
+}
+</style>
+</head>
+<body>
+<div aria-label="Football club randomiser" class="app" role="application">
+<header>
+<div class="logo"> </div>
+<div>
+<h1>Club Picker Continental</h1>
+<p class="lead">Choose a competition (or many) and press <strong>Randomise</strong>. Rapid preview for 1-10 seconds, and lands on a club.</p>
+</div>
+</header>
+<main class="grid">
+<section aria-live="polite" class="card preview">
+<div class="club-pic" id="clubPic" title="Club badge or generated artwork">
+<!-- image inserted here bro -->
+</div>
+<div class="club-name" id="clubName">Press Randomise</div>
+<div class="club-sub" id="clubLeague"></div>
+<div style="display:flex;gap:12px;margin-top:14px">
+<button class="btn btn-random" id="randomBtn">Randomise</button>
+<button class="btn btn-settings" id="openSettings">Leagues</button>
+</div>
+<div style="width:100%;margin-top:12px">
+<div class="quicklist" id="selectedPreview"></div>
+</div>
+</section>
+<aside aria-hidden="true" class="card settings-panel" id="settingsPanel">
+<div>
+<div style="display:flex;justify-content:space-between;align-items:center">
+<strong>Leagues</strong>
+<span class="muted"> </span>
+</div>
+<p class="muted" style="margin:6px 0 0">Toggle leagues to include them in the pool. "+/-" selects/deselects all leagues.</p>
+</div>
+<div id="leaguesContainer">
+<!-- league rows appended here bro -->
+</div>
+<div style="display:flex;gap:8px;margin-top:8px">
+<button class="btn btn-random" id="prefBtn">Preferences</button>
+<button class="btn btn-settings" id="closeSettings">Close</button>
+</div>
+<div class="muted" style="margin-top:8px"> </div>
+</aside>
+
+<section class="card socials-box">
+  <h2 style="margin-top:0">Follow Me</h2>
+  <div style="display:flex; gap:12px; justify-content:center; margin-top:8px;">
+    <a href="https://www.github.com/wcxpert" target="_blank" class="pill">Github</a>
+    <a href="https://www.tiktok.com/@wcxpert" target="_blank" class="pill">TikTok</a>
+  </div>
+</section>
+
+</main>
+<footer>
+  <div class="small">Made with ❤️ — club images are generated when not found.</div>
+  <div class="small"><span class="site-author">© WCXpert</span></div>
+</footer>
+</div>
+
+<script>
+const FALLBACK_LEAGUES = {
+  // UEFA
+  ucl: { 
+    id: "ucl", 
+    continent: "UEFA", 
+    label: "Champions League", 
+    file: "ucl.js", 
+    clubs: [], 
+    enabled: true 
+  },
+  uel: { 
+    id: "uel", 
+    continent: "UEFA", 
+    label: "Europa League", 
+    file: "uel.js", 
+    clubs: [], 
+    enabled: false,
+    displayCount: 36
+  },
+
+  // CONMEBOL
+  copalib: { 
+    id: "copalib", 
+    continent: "CONMEBOL", 
+    label: "Copa Libertadores", 
+    file: "copalib.js", 
+    clubs: [], 
+    enabled: true 
+  },
+
+  // AFC
+  afcElite: { 
+    id: "afcElite", 
+    continent: "AFC", 
+    label: "Champions League Elite", 
+    file: "afcElite.js", 
+    clubs: [], 
+    enabled: true 
+  }
+};
+
+const state = { leagues: {}, pool: [], duration: 5000, cycling: false, cycleSpeed: 80 };
+
+function initLeagues() {
+  Object.values(FALLBACK_LEAGUES).forEach(l => {
+    state.leagues[l.id] = { 
+      ...l, 
+      enabled: l.enabled ?? true
+    };
+  });
+}
+
+function svgDataForName(name, textOverride){
+  const initials = textOverride || (name||'')
+    .split(/\s+/)
+    .map(w=>w[0])
+    .slice(0,2)
+    .join('')
+    .toUpperCase();
+
+  // da boom "?" placeholder
+  if (initials === "?") {
+    const muted = getComputedStyle(document.documentElement)
+      .getPropertyValue('--muted')
+      .trim() || '#94a3b8';
+
+    const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'>
+      <text x='50%' y='50%' font-size='180' text-anchor='middle'
+        dominant-baseline="middle"
+        font-family='Segoe UI, Roboto, Arial' fill='${muted}'>?</text>
+    </svg>`;
+    return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+  }
+
+  let fontSize = 180;
+  if (initials.length === 3) fontSize = 150;
+  if (initials.length >= 4) fontSize = 120;
+
+    const accent = getComputedStyle(document.documentElement)
+    .getPropertyValue('--accent')
+    .trim() || '#10b981';
+
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'>
+    <rect width='100%' height='100%' fill='${accent}' rx='40' />
+    <text x='50%' y='50%' font-size='${fontSize}' text-anchor='middle'
+      dominant-baseline="middle"
+      font-family='Segoe UI, Roboto, Arial' fill='rgba(255,255,255,0.95)'>${initials}</text>
+  </svg>`;
+  return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+}
+
+function showClub(club) {
+  const clubName = document.getElementById('clubName');
+  const clubLeague = document.getElementById('clubLeague');
+  const clubPic = document.getElementById('clubPic');
+  if (!clubName || !clubPic) return;
+
+  clubName.textContent = club.name || 'Unknown Club';
+  clubLeague.textContent = club.country || '';
+
+  const imgUrl = club.image || club.logo || svgDataForName(club.name || 'Club', club.short);
+
+  const leagueClasses = ['logo-glow-ucl', 'logo-glow-uel', 'logo-glow-copalib', 'logo-glow-afcElite'];
+  clubName.classList.remove(...leagueClasses);
+
+switch (club.league) {
+  case 'Champions League': clubName.classList.add('logo-glow-ucl'); break;
+  case 'Europa League': clubName.classList.add('logo-glow-uel'); break;
+  case 'Copa Sudamericana': clubName.classList.add('logo-glow-copasud'); break;
+  case 'Champions League Elite': clubName.classList.add('logo-glow-afcElite'); break;
+  }
+
+  if (!clubPic.firstChild || clubPic.firstChild.src !== imgUrl) {
+    clubPic.innerHTML = '';
+    const img = document.createElement('img');
+    img.alt = club.name || '';
+    img.src = imgUrl;
+    clubPic.appendChild(img);
+  }
+}
+
+function tryLoadExternalLeagues(){
+  Object.values(state.leagues).forEach(league => {
+    if(!league.file) return;
+    const script = document.createElement('script');
+    script.src = league.file;
+    script.async = true;
+    script.onload = () => {
+      const varName = 'LEAGUE_' + league.id;
+      if(window[varName] && Array.isArray(window[varName])){
+        league.clubs = window[varName].map(c => ({...c}));
+        console.log('Loaded external league', league.id);
+        refreshUI();
+      }
+    };
+    script.onerror = () => {
+      // ignore, i'll use fallback clubs if present
+    };
+    document.head.appendChild(script);
+  });
+}
+
+function refreshUI() {
+  const leaguesContainer = document.getElementById('leaguesContainer');
+  if (!leaguesContainer) return;
+  leaguesContainer.innerHTML = '';
+
+  const CONTINENTAL_LEAGUES = {
+    UEFA: Object.values(state.leagues).filter(l => ['ucl','uel','uecl'].includes(l.id)),
+    CONMEBOL: Object.values(state.leagues).filter(l => ['copalib','copasud'].includes(l.id)),
+    AFC: Object.values(state.leagues).filter(l => ['afcElite','afc2'].includes(l.id))
+  };
+
+  Object.entries(CONTINENTAL_LEAGUES).forEach(([continent, leagues]) => {
+    if (leagues.length === 0) return;
+
+    const continentDiv = document.createElement('div');
+    continentDiv.className = 'country-block';
+    continentDiv.innerHTML = `
+      <div class="country-header" tabindex="0" style="text-align:center;font-weight:600;font-size:16px;margin:10px 0; cursor:pointer;">
+        ${continent}
+      </div>
+      <div class="country-leagues" style="display:none;margin-left:0;"></div>
+    `;
+
+    const header = continentDiv.querySelector('.country-header');
+    const leaguesList = continentDiv.querySelector('.country-leagues');
+
+    leagues.forEach(league => {
+      const row = document.createElement('div');
+      row.className = 'league-row';
+      const displayClubs = league.id === 'uel' ? 36 : league.clubs.length;
+      row.innerHTML = `
+        <label style="display:flex;align-items:center;gap:10px;width:100%;padding:4px 0;">
+          <input type="checkbox" data-id="${league.id}" ${league.enabled ? 'checked' : ''} />
+          <div style="flex:1;display:flex;justify-content:space-between;align-items:center;">
+            <span class="logo-glow-${league.id}">${league.label}</span>
+            <span style="color:var(--muted);font-size:12px;">${displayClubs} clubs</span>
+          </div>
+        </label>
+      `;
+      leaguesList.appendChild(row);
+    });
+
+     header.addEventListener('click', () => {
+      const isHidden = leaguesList.style.display === 'none' || leaguesList.style.display === '';
+      leaguesList.style.display = isHidden ? 'block' : 'none';
+    });
+    header.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        header.click();
+      }
+    });
+
+    leaguesContainer.appendChild(continentDiv);
+  });
+
+   const checkboxes = leaguesContainer.querySelectorAll('input[type="checkbox"]');
+  checkboxes.forEach(cb => {
+    cb.addEventListener('change', e => {
+      const id = e.target.dataset.id;
+      if (state.leagues[id]) {
+        state.leagues[id].enabled = e.target.checked;
+        buildPool(); // do NOT call refreshUI here
+      }
+    });
+  });
+
+  buildPool();
+}
+
+function buildPool(){
+  state.pool = [];
+  Object.values(state.leagues).forEach(l=>{
+    if(l.enabled && Array.isArray(l.clubs)){
+      l.clubs.forEach(c => state.pool.push({...c, league:l.label}));
+    }
+  });
+  updateQuicklist();
+}
+
+function updateQuicklist(){
+  const selectedPreview = document.getElementById('selectedPreview');
+  if(!selectedPreview) return;
+  selectedPreview.innerHTML = '';
+  const selectedLeagues = Object.values(state.leagues).filter(l=>l.enabled).map(l=>l.label);
+  if(selectedLeagues.length === 0){
+    selectedPreview.innerHTML = '<div class="pill">No leagues selected</div>';
+    return;
+  }
+  selectedLeagues.forEach(s=>{
+    const el = document.createElement('div');
+    el.className = 'pill';
+    el.textContent = s;
+    selectedPreview.appendChild(el);
+  });
+}
+
+function runRandomiser(){
+  const randomBtn = document.getElementById('randomBtn');
+  if(state.cycling) return;
+  if(!state.pool.length){
+    alert('No clubs in the pool. Enable at least one league in settings.');
+    return;
+  }
+  state.cycling = true;
+  if(randomBtn){ randomBtn.disabled = true; randomBtn.classList.add('pulse'); }
+  const endTime = Date.now() + state.duration;
+  const interval = state.cycleSpeed || 80;
+  const ticker = setInterval(()=>{
+    const idx = Math.floor(Math.random()*state.pool.length);
+    const current = state.pool[idx];
+    showClub(current);
+    if(Date.now() >= endTime){
+      clearInterval(ticker);
+      // final pick
+      const final = state.pool[Math.floor(Math.random()*state.pool.length)];
+      showClub(final);
+      state.cycling = false;
+      if(randomBtn){ randomBtn.disabled = false; randomBtn.classList.remove('pulse'); }
+    }
+  }, interval);
+}
+
+function wire(){
+  const randomBtn = document.getElementById('randomBtn');
+  const openSettings = document.getElementById('openSettings');
+  const settingsPanel = document.getElementById('settingsPanel');
+  const closeSettings = document.getElementById('closeSettings');
+  const prefBtn = document.getElementById('prefBtn');
+  const prefPopup = document.getElementById('prefPopup');
+
+  if(randomBtn) randomBtn.addEventListener('click', runRandomiser);
+  if(openSettings) openSettings.addEventListener('click', ()=>{
+  if(settingsPanel) settingsPanel.setAttribute('aria-hidden','false');
+});
+if(closeSettings) closeSettings.addEventListener('click', ()=>{
+  if(settingsPanel) settingsPanel.setAttribute('aria-hidden','true');
+});
+  if(prefBtn && prefPopup) prefBtn.addEventListener('click', () => { prefPopup.style.display = 'flex'; });
+
+  // default prev
+  const clubPic = document.getElementById('clubPic');
+  if(clubPic){
+    clubPic.innerHTML = '';
+    const img = document.createElement('img'); img.src = svgDataForName('?'); img.alt='wha'; clubPic.appendChild(img);
+  }
+  
+    // wire preference inputs (if present)
+  const prefDurationRange = document.getElementById('prefDurationRange');
+  const prefDurationLabel = document.getElementById('prefDurationLabel');
+  const cycleSpeedRange = document.getElementById('cycleSpeedRange');
+  const themeSelect = document.getElementById('themeSelect');
+
+if (themeSelect) {
+  // Set saved theme on load
+  const savedTheme = localStorage.getItem('clubTheme') || 'ucl-theme';
+  document.body.className = savedTheme;
+  themeSelect.value = savedTheme;
+
+  // Handle user selection
+  themeSelect.addEventListener('change', e => {
+    const themeClass = e.target.value;
+
+    // Remove old theme classes
+    document.body.className = '';
+    document.body.classList.add(themeClass);
+
+    // Save selection
+    localStorage.setItem('clubTheme', themeClass);
+  });
+}
+
+  if(prefDurationRange){
+    prefDurationRange.addEventListener('input', e => {
+      const v = +e.target.value;
+      state.duration = v * 1000;
+      if(prefDurationLabel) prefDurationLabel.textContent = v + 's';
+      localStorage.setItem('clubDuration', v);
+    });
+  }
+
+  if(cycleSpeedRange){
+    cycleSpeedRange.addEventListener('input', e => {
+      const v = +e.target.value;
+      state.cycleSpeed = v;
+      localStorage.setItem('clubSpeed', v);
+    });
+  }
+
+}
+
+// brochacho stop lookin thru mah code
+function addSelectButtons() {
+  const closeSettings = document.getElementById('closeSettings');
+  if (!closeSettings) return;
+  const btnRow = closeSettings.parentElement;
+  if (!btnRow) return;
+
+  const selectAllBtn = document.createElement('button');
+  selectAllBtn.textContent = '+';
+  selectAllBtn.className = 'btn btn-settings';
+
+  const deselectAllBtn = document.createElement('button');
+  deselectAllBtn.textContent = '−';
+  deselectAllBtn.className = 'btn btn-settings';
+
+  btnRow.insertBefore(selectAllBtn, closeSettings);
+  btnRow.insertBefore(deselectAllBtn, closeSettings);
+
+  btnRow.style.display = 'grid';
+  btnRow.style.gridTemplateColumns = 'repeat(4, 1fr)';
+  btnRow.style.gap = '8px';
+
+  selectAllBtn.addEventListener('click', () => {
+    Object.values(state.leagues).forEach(l => l.enabled = true);
+    refreshUI();
+  });
+
+  deselectAllBtn.addEventListener('click', () => {
+    Object.values(state.leagues).forEach(l => l.enabled = false);
+    refreshUI();
+  });
+}
+
+// initialize
+window.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('clubTheme') || 'default';
+  const savedDuration = localStorage.getItem('clubDuration') || 5;
+  const savedSpeed = localStorage.getItem('clubSpeed') || 80;
+
+  document.body.classList.add('theme-' + savedTheme);
+  state.duration = +savedDuration * 1000;
+  state.cycleSpeed = +savedSpeed;
+
+  const prefDurationRange = document.getElementById('prefDurationRange');
+  const prefDurationLabel = document.getElementById('prefDurationLabel');
+  const themeSelect = document.getElementById('themeSelect');
+  const cycleSpeedRange = document.getElementById('cycleSpeedRange');
+
+  if(prefDurationRange) prefDurationRange.value = +savedDuration;
+  if(prefDurationLabel) prefDurationLabel.textContent = (+savedDuration) + 's';
+  if(cycleSpeedRange) cycleSpeedRange.value = +savedSpeed;
+  if(themeSelect) themeSelect.value = savedTheme;
+ 
+const popup2 = document.getElementById('imagePopup');
+
+
+  // note
+  const resetBtn = document.getElementById("resetPrefs");
+if (resetBtn) {
+  resetBtn.addEventListener("click", () => {
+    // clear saved prefs
+    localStorage.removeItem("clubTheme");
+    localStorage.removeItem("clubDuration");
+    localStorage.removeItem("clubSpeed");
+
+    // reset state
+    state.duration = 5000;
+    state.cycleSpeed = 80;
+    document.body.className = "";
+    document.body.classList.add("theme-default");
+
+    // reset UI elements
+    document.getElementById("prefDurationRange").value = 5;
+    document.getElementById("prefDurationLabel").textContent = "5s";
+    document.getElementById("cycleSpeedRange").value = 80;
+    document.getElementById("themeSelect").value = "default";
+  });
+}
+
+  if (imagePopup && Math.random() < 1) { imagePopup.style.display = 'flex'; }
+  // note, reminder to me to change it -> its very inconvenient :sob:
+  initLeagues();
+  refreshUI();
+  wire();
+  addSelectButtons();
+  tryLoadExternalLeagues();
+});
+</script>
+
+<div id="imagePopup" class="popup-overlay" style="display:none;">
+  <div class="popup-card">
+    <button class="popup-close" onclick="document.getElementById('imagePopup').style.display='none'">&times;</button>
+    <img src="https://wcxpert.github.io/club/images/extra/ball.png" class="popup-img">
+    <h2 class="popup-title">Regular Leagues Edition</h2>
+    <p class="popup-desc">Generate random clubs from the Premier League, LALIGA, Bundesliga and much more!</p>
+    <button class="btn btn-random" onclick="window.location.href='https://wcxpert.github.io/club'">Explore</button>
+  </div>
+</div>
+  <div id="prefPopup" class="popup-overlay" style="display:none;">
+  <div class="popup-card">
+    <button class="popup-close" onclick="document.getElementById('prefPopup').style.display='none'">&times;</button>
+    <h2 class="popup-title">Preferences</h2>
+    <div style="text-align:left; margin-top:12px;">
+      <label>Cycle Duration: <span id="prefDurationLabel">5s</span></label>
+      <input id="prefDurationRange" type="range" min="1" max="10" value="5" />
+    </div>
+    <div style="text-align:left; margin-top:12px;">
+      <label for="themeSelect">Theme:</label>
+      <select id="themeSelect">
+  <option value="ucl-theme">UEFA Champions League</option>
+  <option value="uel-theme">UEFA Europa League</option>
+  <option value="copalib-theme">Copa Libertadores</option>
+  <option value="afcElite-theme">AFC Champions League Elite</option>
+</select>
+
+    </div>
+    <div style="text-align:left; margin-top:12px;">
+      <label>Cycle Animation Speed</label>
+      <input id="cycleSpeedRange" type="range" min="50" max="300" value="80" />
+    </div>
+
+    <div style="margin-top:16px; display:flex; justify-content:center;">
+      <button class="btn btn-settings" id="resetPrefs">Reset</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
