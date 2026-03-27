@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WCXpert</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: radial-gradient(circle at top, #0f2027, #050505);
+        color: white;
+        overflow-x: hidden;
+    }
+
+    /* Animated background */
+    body::before {
+        content: "";
+        position: fixed;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, #00f7ff22, transparent 60%);
+        animation: moveGlow 10s linear infinite;
+        z-index: -1;
+    }
+
+    @keyframes moveGlow {
+        0% { transform: translate(-25%, -25%); }
+        50% { transform: translate(0%, 0%); }
+        100% { transform: translate(-25%, -25%); }
+    }
+
+    header {
+        text-align: center;
+        padding: 30px;
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #00f7ff;
+        animation: glowPulse 2s infinite alternate;
+    }
+
+    @keyframes glowPulse {
+        from { text-shadow: 0 0 10px #00f7ff; }
+        to { text-shadow: 0 0 30px #00f7ff, 0 0 60px #00f7ff; }
+    }
+
+    /* GRID SYSTEM */
+    .container {
+        display: grid;
+        gap: 25px;
+        padding: 40px;
+
+        /* MOBILE DEFAULT */
+        grid-template-columns: 1fr;
+
+        justify-content: center;
+    }
+
+    /* Tablet */
+    @media (min-width: 600px) {
+        .container {
+            grid-template-columns: repeat(2, minmax(220px, 280px));
+        }
+    }
+
+    /* Small desktop */
+    @media (min-width: 900px) {
+        .container {
+            grid-template-columns: repeat(3, minmax(220px, 280px));
+        }
+    }
+
+    /* Desktop */
+    @media (min-width: 1200px) {
+        .container {
+            grid-template-columns: repeat(4, minmax(220px, 280px));
+        }
+    }
+
+    .card {
+        background: #111;
+        border-radius: 15px;
+        overflow: hidden;
+        text-decoration: none;
+        color: white;
+        box-shadow: 0 0 10px #00f7ff33;
+        transition: 0.4s;
+        position: relative;
+
+        animation: floatUp 0.8s ease forwards;
+        opacity: 0;
+    }
+
+    /* Stagger animation */
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.3s; }
+    .card:nth-child(4) { animation-delay: 0.4s; }
+    .card:nth-child(5) { animation-delay: 0.5s; }
+
+    @keyframes floatUp {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .card:hover {
+        transform: translateY(-12px) scale(1.04);
+        box-shadow: 0 0 20px #00f7ff, 0 0 60px #00f7ff88;
+    }
+
+    /* Neon animated border */
+    .card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 15px;
+        padding: 2px;
+        background: linear-gradient(45deg, #00f7ff, transparent, #00f7ff);
+        -webkit-mask:
+            linear-gradient(#000 0 0) content-box,
+            linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: 0.4s;
+    }
+
+    .card:hover::before {
+        opacity: 1;
+        animation: borderFlow 2s linear infinite;
+    }
+
+    @keyframes borderFlow {
+        0% { filter: hue-rotate(0deg); }
+        100% { filter: hue-rotate(360deg); }
+    }
+
+    .card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        transition: 0.4s;
+    }
+
+    .card:hover img {
+        transform: scale(1.1);
+        filter: brightness(1.2);
+    }
+
+    .card-content {
+        padding: 15px;
+    }
+
+    .card-title {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+        color: #00f7ff;
+    }
+
+    .card-text {
+        font-size: 0.9rem;
+        color: #ccc;
+    }
+
+</style>
+</head>
+
+<body>
+
+<header>WCXpert</header>
+
+<div class="container">
+
+    <a href="/club" class="card">
+        <img src="https://wcxpert.github.io/club/images/extra/ball.png" alt="">
+        <div class="card-content">
+            <div class="card-title">Club Picker</div>
+            <div class="card-text">Generate a random club.</div>
+        </div>
+    </a>
+
+    <a href="/logo" class="card">
+        <img src="https://wcxpert.github.io/club/images/extra/logo.png" alt="">
+        <div class="card-content">
+            <div class="card-title">Club Guesser</div>
+            <div class="card-text">Guess football logos.</div>
+        </div>
+    </a>
+
+</div>
+
+</body>
+</html>
