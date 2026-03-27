@@ -59,7 +59,7 @@ revealed:"images/48.png"
 {
 name:"Getafe",
 answers:["getafe","getafe cf","getafe c.f.","getafe cf sad", "getafe c.f. s.a.d."],
-hidden:"images/getafe.png",
+hidden:"images/56.png",
 revealed:"images/getafe.png"
 },
 
@@ -73,7 +73,7 @@ revealed:"images/51.png"
 {
 name:"Espanyol",
 answers:["rcd espanyol","rcde","espanyol", "rcd espanyol de barcelona", "espanyol de barcelona"],
-hidden:"images/espanyol.png",
+hidden:"images/57.png",
 revealed:"images/espanyol.png"
 },
 
