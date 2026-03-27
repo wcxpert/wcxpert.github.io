@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Football Badge Guesser</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(160deg,#0f172a,#020617);
+color:white;
+text-align:center;
+}
+
+h1{
+margin-top:20px;
+}
+
+/* Cards */
+
+.card{
+background:rgba(255,255,255,0.05);
+border-radius:16px;
+padding:20px;
+margin:20px;
+backdrop-filter:blur(10px);
+box-shadow:0 0 20px rgba(0,0,0,0.4);
+}
+
+/* Buttons */
+
+button{
+padding:12px 20px;
+border:none;
+border-radius:10px;
+background:#3b82f6;
+color:white;
+font-size:16px;
+margin:10px;
+cursor:pointer;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+/* Inputs */
+
+input{
+padding:10px;
+width:70%;
+border-radius:10px;
+border:none;
+margin-top:10px;
+}
+
+/* Hide elements */
+
+.hidden{
+display:none;
+}
+
+/* League Grid */
+
+.league-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:10px;
+}
+
+.league-grid label{
+background:rgba(255,255,255,0.05);
+padding:10px;
+border-radius:10px;
+}
+
+.blur{
+filter:blur(12px) brightness(1);
+}
+
+/* Popup */
+
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.9);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+
+.popup.hidden{
+display:none;
+}
+
+#popup img{
+width:200px;
+margin-bottom:20px;
+}
+
+/* Progress */
+
+.progress{
+font-size:18px;
+margin:10px;
+}
+.progress-area{
+width:100%;
+}
+#game{
+min-height:100vh;
+padding:20px;
+}
+
+#game:not(.hidden){
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.game-card{
+
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(12px);
+
+border-radius:20px;
+
+padding:35px 25px;
+
+width:90%;
+max-width:380px;
+
+box-shadow:
+0 0 40px rgba(0,0,0,0.6),
+0 0 15px rgba(59,130,246,0.25);
+
+display:flex;
+flex-direction:column;
+align-items:center;
+
+gap:16px;
+
+}
+
+#resultStatus{
+font-size:28px;
+font-weight:bold;
+margin-bottom:10px;
+}
+
+/* FIFA style glow border */
+
+.game-card::before{
+
+content:"";
+
+position:absolute;
+
+width:380px;
+height:420px;
+
+border-radius:22px;
+
+background:linear-gradient(
+120deg,
+transparent,
+rgba(59,130,246,0.35),
+transparent
+);
+
+filter:blur(40px);
+
+z-index:-1;
+
+}
+
+/* Logo */
+
+#logo{
+width:180px;
+margin:10px 0 5px 0;
+}
+
+/* Guess input */
+
+#guessInput{
+width:85%;
+font-size:16px;
+}
+
+/* Guess button */
+
+.game-card button{
+width:60%;
+}
+.progress-bar{
+width:100%;
+height:10px;
+background:rgba(255,255,255,0.15);
+border-radius:10px;
+overflow:hidden;
+}
+
+.burger {
+line-height: 10px;
+}
+ 
+.pizza {
+line-height: 20px;
+}
+ 
+.pasta {
+ display: flex;
+}
+ 
+#progressFill{
+height:100%;
+width:0%;
+background:linear-gradient(90deg,#3b82f6,#60a5fa);
+transition:0.3s;
+}
+
+.progress-info{
+font-size:14px;
+}
+
+/* extras box */
+
+.extras-box{
+background:#0f172a;
+padding:25px;
+border-radius:16px;
+width:280px;
+box-shadow:0 0 20px rgba(0,0,0,0.6);
+}
+/* Button row */
+
+.menu-buttons{
+display:flex;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HOME MENU -->
+
+<div id="home" class="card">
+
+<h1>⚽ Badge Guesser</h1>
+
+<h3>Select Leagues</h3>
+
+<div class="league-grid">
+
+<label><input type="checkbox" value="premier"> Premier League</label>
+<label><input type="checkbox" value="laliga"> LaLiga</label>
+<label><input type="checkbox" value="bundesliga"> Bundesliga</label>
+<label><input type="checkbox" value="random"> Random</label>
+
+</div>
+
+<div class="menu-buttons">
+
+<button onclick="startGame()">Start</button>
+<button onclick="openExtras()">Extras</button>
+<button onclick="startDaily()">Daily Challenge</button>
+
+</div>
+
+</div>
+
+
+<!-- GAME SCREEN -->
+<div id="game" class="hidden">
+
+<div class="game-card">
+
+<div class="progress-area">
+
+<div class="progress-bar">
+<div id="progressFill"></div>
+</div>
+
+<div class="progress-info">
+<span id="progressText"></span> |
+Score: <span id="score">0</span> |
+Time: <span id="timer">15</span>
+</div>
+
+</div>
+
+<img id="logo">
+<input 
+id="guessInput" 
+placeholder="Enter club name"
+enterkeyhint="go"
+autocapitalize="off"
+>
+
+<button onclick="submitGuess()">Guess</button>
+
+<p id="message"></p>
+
+</div>
+
+</div>
+<!-- RESULT POPUP -->
+
+<div id="popup" class="popup hidden">
+
+<h2 id="resultStatus"></h2>
+
+<img id="revealedLogo">
+<h2 id="resultText"></h2>
+ <div class="burger">
+<p id="points"></p>
+  <p id="popupProgress"></p>
+</div>
+
+ <div class="container">
+
+ <button onclick="nextLogo()">Next</button>
+
+ <button onclick="quitGame()">Quit</button>
+
+</div></div>
+
+
+<!-- EXTRAS POPUP -->
+<div id="extrasPopup" class="popup hidden">
+
+<div class="extras-box">
+
+<h2>Extras</h2>
+
+<p>Logos: <span id="logoCount">10</span></p>
+
+<input type="range" min="5" max="20" value="10" id="logoSlider">
+
+<br><br>
+
+<label>
+<input type="checkbox" id="blurToggle" checked>
+ Enable Blur
+</label>
+
+<br><br>
+
+<label>Confetti Type</label>
+
+<select id="confettiType">
+<option value="squares">Squares</option>
+<option value="circles">Circles</option>
+<option value="mix">Mixed</option>
+</select>
+
+<br><br>
+
+<button onclick="closeExtras()">Close</button>
+
+</div>
+
+</div>
+<script src="premierleague.js"></script>
+<script src="laliga.js"></script>
+<script src="bundesliga.js"></script>
+
+<script src="main.js"></script>
+
+</body>
+</html>
