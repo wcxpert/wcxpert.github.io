@@ -159,8 +159,6 @@ let guess=input.value.toLowerCase().trim()
 
 let team=gameTeams[current]
 
-input.blur()
-
 if(team.answers.includes(guess)){
 
 score+=100
@@ -177,6 +175,7 @@ if(mistakes>maxMistakes){
 showPopup(false)
 }else{
 document.getElementById("message").innerText="Try again!"
+    document.getElementById("guessInput").focus()
 }
 
 }
@@ -297,7 +296,26 @@ activeConfetti--
 
 }
 
-document.getElementById("guessInput").addEventListener("keydown", function(e){
+document.addEventListener("keydown", function(e){
+
+let popupOpen = !document.getElementById("popup").classList.contains("hidden")
+
+if(!popupOpen) return
+
+// NEXT LOGO
+if(e.key === "Enter" || e.key === " "){
+e.preventDefault()
+nextLogo()
+}
+
+// QUIT GAME
+if(e.key === "Backspace" || e.key === "Delete"){
+e.preventDefault()
+quitGame()
+}
+
+})
+    document.getElementById("guessInput").addEventListener("keydown", function(e){
 
 if(e.key !== "Enter") return
 
