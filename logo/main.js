@@ -75,7 +75,7 @@ function startDaily(){
 
 let seed=new Date().getDate()
 
-allTeams=[...premierLeague,...laLiga,...bundesliga]
+allTeams=[...premierLeague,...laliga,...bundesliga]
 
 allTeams.sort(()=>Math.sin(seed++)*10000)
 
@@ -300,39 +300,26 @@ document.addEventListener("keydown", function(e){
 
 let popupOpen = !document.getElementById("popup").classList.contains("hidden")
 
-if(!popupOpen) return
+// WHEN POPUP IS OPEN
+if(popupOpen){
 
-// NEXT LOGO
 if(e.key === "Enter" || e.key === " "){
 e.preventDefault()
 nextLogo()
 }
 
-// QUIT GAME
 if(e.key === "Backspace" || e.key === "Delete"){
 e.preventDefault()
 quitGame()
 }
 
-})
-    document.getElementById("guessInput").addEventListener("keydown", function(e){
+return
+}
 
-if(e.key !== "Enter") return
-
+// DURING GAME
+if(e.key === "Enter"){
 e.preventDefault()
-
-let popupOpen = !document.getElementById("popup").classList.contains("hidden")
-
-if(popupOpen){
-
-// ENTER = Next logo when result popup is visible
-nextLogo()
-
-}else{
-
-// ENTER = Submit guess during game
 submitGuess()
-
 }
 
 })
