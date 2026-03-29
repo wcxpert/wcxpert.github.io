@@ -52,7 +52,6 @@ function buildTeams() {
 }
 
 function startDifficultyGame(level) {
-  closeDifficulty()
   let list = difficultyData[level]   // get all IDs for that level
   allTeams = []
 
@@ -62,8 +61,9 @@ function startDifficultyGame(level) {
     if(team) allTeams.push(team)
   })
 
-  total = parseInt(document.getElementById("logoSlider").value)
+  total = Math.min(parseInt(slider.value), difficultyIDs[level].length)
   gameTeams = shuffle([...allTeams]).slice(0, total)
+  closeDifficulty()
 
   document.getElementById("home").classList.add("hidden")
   document.getElementById("game").classList.remove("hidden")
