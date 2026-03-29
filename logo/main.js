@@ -51,6 +51,34 @@ function buildTeams() {
   if (selectedLeagues.includes("ligue1")) allTeams.push(...ligue1)
 }
 
+function startDifficultyGame(level) {
+  let list = difficultyData[level]   // get all IDs for that level
+  allTeams = []
+
+  list.forEach(item => {
+    let teamArray = getLeagueArray(item.league)  // helper function
+    let team = teamArray.find(t => t.id === item.id)
+    if(team) allTeams.push(team)
+  })
+
+  total = parseInt(document.getElementById("logoSlider").value)
+  gameTeams = shuffle([...allTeams]).slice(0, total)
+
+  document.getElementById("home").classList.add("hidden")
+  document.getElementById("game").classList.remove("hidden")
+  current = 0
+  score = 0
+  nextRound()
+}
+
+function getLeagueArray(name) {
+  if(name==="premier") return premierLeague
+  if(name==="laliga") return laliga
+  if(name==="bundesliga") return bundesliga
+  if(name==="ligue1") return ligue1
+  return []
+}
+
 function setDifficulty(level) {
   difficulty = level
   closeDifficulty()
