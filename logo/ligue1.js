@@ -109,7 +109,7 @@ id: 71,
 name:"Havre AC",
 answers:["havre ac","hac","le havre"],
 hidden:"images/71.png",
-revealed:"images/hac.png"
+revealed:"images/71.png"
 },
 
 {
