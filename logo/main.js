@@ -52,6 +52,7 @@ function buildTeams() {
 }
 
 function startDifficultyGame(level) {
+  closeDifficulty()
   let list = difficultyData[level]   // get all IDs for that level
   allTeams = []
 
