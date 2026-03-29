@@ -5,9 +5,6 @@
 <title>Football Logo Guess</title>
 
 <link rel="icon" type="image/png" href="https://wcxpert.github.io/club/images/icon/favicon-96x96.png">
-<link rel="icon" type="image/svg+xml" href="https://wcxpert.github.io/club/images/icon/favicon.svg">
-<link rel="shortcut icon" href="https://wcxpert.github.io/club/images/icon/favicon.ico">
-<link rel="apple-touch-icon" sizes="180x180" href="https://wcxpert.github.io/club/images/icon/apple-touch-icon.png">
 
 <style>
 
@@ -19,9 +16,7 @@ color:white;
 text-align:center;
 }
 
-.hidden{
-display:none !important;
-}
+.hidden{display:none !important;}
 
 #home{
 min-height:100vh;
@@ -29,6 +24,7 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
+gap:20px;
 }
 
 .home-grid{
@@ -36,7 +32,7 @@ display:grid;
 grid-template-columns:1fr 1fr;
 gap:20px;
 width:90%;
-max-width:400px;
+max-width:420px;
 }
 
 .home-box{
@@ -44,17 +40,22 @@ background:rgba(255,255,255,0.05);
 border-radius:16px;
 padding:20px;
 cursor:pointer;
-transition:0.2s;
+transition:all 0.25s ease;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:10px;
+box-shadow:0 4px 12px rgba(59,130,246,0.3);
 }
 
 .home-box:hover{
-transform:scale(1.05);
-background:rgba(59,130,246,0.2);
+transform:translateY(-5px) scale(1.05);
+box-shadow:0 6px 20px rgba(59,130,246,0.6);
+background:rgba(59,130,246,0.15);
 }
 
 .home-box img{
-width:60px;
-margin-bottom:10px;
+width:80px;
 }
 
 .popup{
@@ -70,39 +71,33 @@ justify-content:center;
 align-items:center;
 }
 
-.popup.hidden{
-display:none;
-}
-
 .extras-box{
 background:#0f172a;
 padding:25px;
 border-radius:16px;
-width:350px;
-max-width:90vw;
+width:380px;
+max-width:95vw;
 box-shadow:0 0 20px rgba(0,0,0,0.6);
 }
 
 .league-grid-select{
 display:flex;
 flex-wrap:wrap;
-flex-direction:column;
 justify-content:center;
 gap:15px;
 }
 
-@media(min-width:600px){
-.league-grid-select{
-flex-direction:row;
-}
-}
-
 .league-box{
+width:140px;
 padding:15px;
 border-radius:12px;
 background:rgba(255,255,255,0.05);
 cursor:pointer;
 transition:0.2s;
+}
+
+.league-box img{
+width:50px;
 }
 
 .league-box.active{
@@ -112,17 +107,13 @@ box-shadow:0 0 15px rgba(59,130,246,0.8);
 
 #game{
 min-height:100vh;
-padding:20px;
-}
-
-#game:not(.hidden){
 display:flex;
 justify-content:center;
 align-items:center;
+padding:20px;
 }
 
 .game-card{
-position:relative;
 background:rgba(255,255,255,0.05);
 backdrop-filter:blur(12px);
 border-radius:20px;
@@ -136,74 +127,51 @@ align-items:center;
 gap:16px;
 }
 
-#logo{
-width:180px;
+#logo{width:180px;}
+
+#revealedLogo{
+width:200px;
+max-width:80vw;
+height:auto;
+margin-bottom:20px;
 }
 
-#popup img#revealedLogo {
-  width: 200px;
-  max-width: 80vw;
-  height: auto;
-  margin-bottom: 20px;
-}
-  
-.blur{
-filter:blur(12px);
-}
+.blur{filter:blur(12px);}
 
-#guessInput{
+input, select{
 width:85%;
-font-size:16px;
+padding:10px;
+border-radius:10px;
+border:none;
+background:rgba(255,255,255,0.05);
+color:white;
 }
 
-button {
-  padding: 12px 25px;
-  border: none;
-  border-radius: 12px;
-  background: rgba(59, 130, 246, 0.25);
-  backdrop-filter: blur(6px);
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
+input::placeholder{
+color:rgba(255,255,255,0.6);
 }
 
-button:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.7);
-  background: rgba(59, 130, 246, 0.35);
+button{
+padding:12px 25px;
+border:none;
+border-radius:12px;
+background:rgba(59,130,246,0.25);
+color:#fff;
+font-weight:600;
+cursor:pointer;
+transition:0.2s;
+box-shadow:0 4px 12px rgba(59,130,246,0.5);
 }
 
-button:active {
-  transform: translateY(0) scale(0.98);
-  box-shadow: 0 3px 10px rgba(59, 130, 246, 0.5);
+button:hover{
+transform:translateY(-3px) scale(1.05);
+background:rgba(59,130,246,0.35);
 }
 
-.home-box {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  padding: 20px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-}
-
-.home-box:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
-  background: rgba(59, 130, 246, 0.15);
-}
-
-.home-box img {
-  width: 80px;
-  height: auto;
+.popup-buttons{
+display:flex;
+gap:20px;
+margin-top:10px;
 }
 
 .progress-bar{
@@ -221,13 +189,11 @@ background:linear-gradient(90deg,#3b82f6,#60a5fa);
 }
 
 </style>
-
 </head>
 
 <body>
 
 <div id="home">
-
 <h1>⚽ Badge Guesser</h1>
 
 <div class="home-grid">
@@ -253,11 +219,9 @@ background:linear-gradient(90deg,#3b82f6,#60a5fa);
 </div>
 
 </div>
-
 </div>
 
 <div id="game" class="hidden">
-
 <div class="game-card">
 
 <div class="progress-bar">
@@ -272,42 +236,38 @@ Time: <span id="timer">15</span>
 
 <img id="logo">
 
+<form autocomplete="off">
 <input 
 id="guessInput"
 placeholder="Enter club name"
-enterkeyhint="go"
-autocapitalize="off"
-autocomplete="new-password"
+autocomplete="off"
 autocorrect="off"
-spellcheck="false"
->
+spellcheck="false">
+</form>
 
 <button onclick="submitGuess()">Guess</button>
-
 <p id="message"></p>
 
 </div>
-
 </div>
 
 <div id="popup" class="popup hidden">
 
 <h2 id="resultStatus"></h2>
-
 <img id="revealedLogo">
-
 <h2 id="resultText"></h2>
 
 <p id="points"></p>
 <p id="popupProgress"></p>
 
+<div class="popup-buttons">
 <button onclick="nextLogo()">Next</button>
 <button onclick="quitGame()">Quit</button>
+</div>
 
 </div>
 
 <div id="optionsPopup" class="popup hidden">
-
 <div class="extras-box">
 
 <h2>Options</h2>
@@ -321,7 +281,7 @@ spellcheck="false"
 
 <label>Blur</label>
 <select id="blurToggle">
-<option value="no" selected>No</option>
+<option value="no">No</option>
 <option value="yes">Yes</option>
 </select>
 
@@ -329,6 +289,7 @@ spellcheck="false"
 
 <label>Confetti</label>
 <select id="confettiType">
+<option value="off">Off</option>
 <option value="squares">Squares</option>
 <option value="circles">Circles</option>
 <option value="mix">Mixed</option>
@@ -346,7 +307,7 @@ spellcheck="false"
 
 <label>Bonus</label>
 <select id="bonusToggle">
-<option value="yes" selected>Yes</option>
+<option value="yes">Yes</option>
 <option value="no">No</option>
 </select>
 
@@ -355,11 +316,9 @@ spellcheck="false"
 <button onclick="closeOptions()">Close</button>
 
 </div>
-
 </div>
 
 <div id="difficultyPopup" class="popup hidden">
-
 <div class="extras-box">
 
 <h2>Difficulty</h2>
@@ -373,12 +332,13 @@ spellcheck="false"
 <button onclick="closeDifficulty()">Back</button>
 
 </div>
-
 </div>
 
 <div id="selectionPopup" class="popup hidden">
 <div class="extras-box">
+
 <h2>Select Leagues</h2>
+
 <div class="league-grid-select">
 
 <div class="league-box" onclick="toggleLeague('premier', this)">
@@ -405,11 +365,12 @@ spellcheck="false"
 
 <br>
 
-<button onclick="closeSelection()">Back</button>
+<div class="popup-buttons">
 <button onclick="startSelectionGame()">Go</button>
-
+<button onclick="closeSelection()">Back</button>
 </div>
 
+</div>
 </div>
 
 <div id="loadingScreen" class="popup hidden">
