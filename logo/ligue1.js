@@ -99,7 +99,7 @@ revealed:"images/angers.png"
 {
 id: 70,
 name:"Paris FC",
-answers:["paris fc","pfc"],
+answers:["paris fc","pfc","paris"],
 hidden:"images/70.png",
 revealed:"images/parisfc.png"
 },
