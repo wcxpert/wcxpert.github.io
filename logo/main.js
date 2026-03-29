@@ -48,6 +48,7 @@ allTeams=[]
 if(selectedLeagues.includes("premier")) allTeams.push(...premierLeague)
 if(selectedLeagues.includes("laliga")) allTeams.push(...laliga)
 if(selectedLeagues.includes("bundesliga")) allTeams.push(...bundesliga)
+if(selectedLeagues.includes("ligue1")) allTeams.push(...ligue1)
 }
 
 function setDifficulty(level){
@@ -66,7 +67,7 @@ startGame()
 }
 
 function startRandom(){
-allTeams=[...premierLeague,...laliga,...bundesliga]
+allTeams=[...premierLeague,...laliga,...bundesliga,...ligue1]
 startGame()
 }
 
@@ -265,6 +266,10 @@ document.getElementById("difficultyPopup").classList.add("hidden")
 
 function openSelection(){
 document.getElementById("selectionPopup").classList.remove("hidden")
+}
+
+function closeSelection() {
+  document.getElementById("selectionPopup").classList.add("hidden");
 }
 
 function confetti(){
