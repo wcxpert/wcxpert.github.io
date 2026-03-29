@@ -78,14 +78,17 @@ display:none;
 background:#0f172a;
 padding:25px;
 border-radius:16px;
-width:300px;
+width:350px;
+max-width:90vw;
 box-shadow:0 0 20px rgba(0,0,0,0.6);
 }
 
 .league-grid-select{
 display:flex;
+flex-wrap:wrap;
 flex-direction:column;
-gap:10px;
+justify-content:center;
+gap:15px;
 }
 
 @media(min-width:600px){
@@ -361,9 +364,9 @@ spellcheck="false"
 
 <h2>Difficulty</h2>
 
-<button onclick="setDifficulty(1)">⭐ Easy</button>
-<button onclick="setDifficulty(2)">⭐⭐ Medium</button>
-<button onclick="setDifficulty(3)">⭐⭐⭐ Hard</button>
+<button onclick="setDifficulty(1)">★</button>
+<button onclick="setDifficulty(2)">★ ★</button>
+<button onclick="setDifficulty(3)">★ ★ ★</button>
 
 <br><br>
 
