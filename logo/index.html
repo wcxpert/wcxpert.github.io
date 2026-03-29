@@ -153,6 +153,56 @@ width:85%;
 font-size:16px;
 }
 
+button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 12px;
+  background: rgba(59, 130, 246, 0.25);
+  backdrop-filter: blur(6px);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
+}
+
+button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.7);
+  background: rgba(59, 130, 246, 0.35);
+}
+
+button:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 3px 10px rgba(59, 130, 246, 0.5);
+}
+
+.home-box {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.home-box:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+  background: rgba(59, 130, 246, 0.15);
+}
+
+.home-box img {
+  width: 80px;
+  height: auto;
+}
+
 .progress-bar{
 width:100%;
 height:10px;
@@ -343,6 +393,11 @@ spellcheck="false"
 <p>Bundesliga</p>
 </div>
 
+<div class="league-box" onclick="toggleLeague('ligue1', this)">
+<img src="images/ligue1.png">
+<p>Ligue 1</p>
+</div>
+
 </div>
 
 <br>
@@ -361,6 +416,7 @@ spellcheck="false"
 <script src="premierleague.js"></script>
 <script src="laliga.js"></script>
 <script src="bundesliga.js"></script>
+<script src="ligue1.js"></script>
 
 <script src="main.js"></script>
 
