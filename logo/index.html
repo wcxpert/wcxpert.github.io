@@ -137,6 +137,13 @@ gap:16px;
 width:180px;
 }
 
+#popup img#revealedLogo {
+  width: 200px;
+  max-width: 80vw;
+  height: auto;
+  margin-bottom: 20px;
+}
+  
 .blur{
 filter:blur(12px);
 }
@@ -317,11 +324,8 @@ spellcheck="false"
 </div>
 
 <div id="selectionPopup" class="popup hidden">
-
 <div class="extras-box">
-
 <h2>Select Leagues</h2>
-
 <div class="league-grid-select">
 
 <div class="league-box" onclick="toggleLeague('premier', this)">
@@ -331,7 +335,7 @@ spellcheck="false"
 
 <div class="league-box" onclick="toggleLeague('laliga', this)">
 <img src="images/laliga.png">
-<p>La Liga</p>
+<p>LaLiga</p>
 </div>
 
 <div class="league-box" onclick="toggleLeague('bundesliga', this)">
@@ -343,6 +347,7 @@ spellcheck="false"
 
 <br>
 
+<button onclick="closeSelection()">Back</button>
 <button onclick="startSelectionGame()">Go</button>
 
 </div>
