@@ -3,11 +3,11 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Football Logo Guesser</title>
- <link rel="icon" type="image/png" href="https://wcxpert.github.io/club/images/icon/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="https://wcxpert.github.io/club/images/icon/favicon.svg" />
-<link rel="shortcut icon" href="https://wcxpert.github.io/club/images/icon/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="https://wcxpert.github.io/club/images/icon/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="Football Logos" />
+
+<link rel="icon" type="image/png" href="https://wcxpert.github.io/club/images/icon/favicon-96x96.png">
+<link rel="icon" type="image/svg+xml" href="https://wcxpert.github.io/club/images/icon/favicon.svg">
+<link rel="shortcut icon" href="https://wcxpert.github.io/club/images/icon/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="https://wcxpert.github.io/club/images/icon/apple-touch-icon.png">
 
 <style>
 
@@ -19,74 +19,43 @@ color:white;
 text-align:center;
 }
 
-h1{
-margin-top:20px;
+.hidden{
+display:none !important;
 }
 
-/* Cards */
+#home{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
 
-.card{
+.home-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+width:90%;
+max-width:400px;
+}
+
+.home-box{
 background:rgba(255,255,255,0.05);
 border-radius:16px;
 padding:20px;
-margin:20px;
-backdrop-filter:blur(10px);
-box-shadow:0 0 20px rgba(0,0,0,0.4);
-}
-
-/* Buttons */
-
-button{
-padding:12px 20px;
-border:none;
-border-radius:10px;
-background:#3b82f6;
-color:white;
-font-size:16px;
-margin:10px;
 cursor:pointer;
+transition:0.2s;
 }
 
-button:hover{
+.home-box:hover{
 transform:scale(1.05);
+background:rgba(59,130,246,0.2);
 }
 
-/* Inputs */
-
-input{
-padding:10px;
-width:70%;
-border-radius:10px;
-border:none;
-margin-top:10px;
+.home-box img{
+width:60px;
+margin-bottom:10px;
 }
-
-/* Hide elements */
-
-.hidden{
-display:none;
-}
-
-/* League Grid */
-
-.league-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-margin-top:10px;
-}
-
-.league-grid label{
-background:rgba(255,255,255,0.05);
-padding:10px;
-border-radius:10px;
-}
-
-.blur{
-filter:blur(12px) brightness(1);
-}
-
-/* Popup */
 
 .popup{
 position:fixed;
@@ -105,20 +74,39 @@ align-items:center;
 display:none;
 }
 
-#popup img{
-width:200px;
-margin-bottom:20px;
+.extras-box{
+background:#0f172a;
+padding:25px;
+border-radius:16px;
+width:300px;
+box-shadow:0 0 20px rgba(0,0,0,0.6);
 }
 
-/* Progress */
+.league-grid-select{
+display:flex;
+flex-direction:column;
+gap:10px;
+}
 
-.progress{
-font-size:18px;
-margin:10px;
+@media(min-width:600px){
+.league-grid-select{
+flex-direction:row;
 }
-.progress-area{
-width:100%;
 }
+
+.league-box{
+padding:15px;
+border-radius:12px;
+background:rgba(255,255,255,0.05);
+cursor:pointer;
+transition:0.2s;
+}
+
+.league-box.active{
+background:rgba(59,130,246,0.4);
+box-shadow:0 0 15px rgba(59,130,246,0.8);
+}
+
 #game{
 min-height:100vh;
 padding:20px;
@@ -131,80 +119,33 @@ align-items:center;
 }
 
 .game-card{
-
+position:relative;
 background:rgba(255,255,255,0.05);
 backdrop-filter:blur(12px);
-
 border-radius:20px;
-
 padding:35px 25px;
-
 width:90%;
 max-width:380px;
-
-box-shadow:
-0 0 40px rgba(0,0,0,0.6),
-0 0 15px rgba(59,130,246,0.25);
-
+box-shadow:0 0 40px rgba(0,0,0,0.6),0 0 15px rgba(59,130,246,0.25);
 display:flex;
 flex-direction:column;
 align-items:center;
-
 gap:16px;
-
 }
-
-#resultStatus{
-font-size:28px;
-font-weight:bold;
-margin-bottom:10px;
-}
-
-/* FIFA style glow border */
-
-.game-card::before{
-
-content:"";
-
-position:absolute;
-
-width:380px;
-height:420px;
-
-border-radius:22px;
-
-background:linear-gradient(
-120deg,
-transparent,
-rgba(59,130,246,0.35),
-transparent
-);
-
-filter:blur(40px);
-
-z-index:-1;
-
-}
-
-/* Logo */
 
 #logo{
 width:180px;
-margin:10px 0 5px 0;
 }
 
-/* Guess input */
+.blur{
+filter:blur(12px);
+}
 
 #guessInput{
 width:85%;
 font-size:16px;
 }
 
-/* Guess button */
-
-.game-card button{
-width:60%;
-}
 .progress-bar{
 width:100%;
 height:10px;
@@ -213,45 +154,10 @@ border-radius:10px;
 overflow:hidden;
 }
 
-.burger {
-line-height: 10px;
-}
- 
-.pizza {
-line-height: 20px;
-}
- 
-.pasta {
- display: flex;
-}
- 
 #progressFill{
 height:100%;
 width:0%;
 background:linear-gradient(90deg,#3b82f6,#60a5fa);
-transition:0.3s;
-}
-
-.progress-info{
-font-size:14px;
-}
-
-/* extras box */
-
-.extras-box{
-background:#0f172a;
-padding:25px;
-border-radius:16px;
-width:280px;
-box-shadow:0 0 20px rgba(0,0,0,0.6);
-}
-/* Button row */
-
-.menu-buttons{
-display:flex;
-justify-content:center;
-gap:10px;
-flex-wrap:wrap;
 }
 
 </style>
@@ -260,59 +166,60 @@ flex-wrap:wrap;
 
 <body>
 
-<!-- HOME MENU -->
-
-<div id="home" class="card">
+<div id="home">
 
 <h1>⚽ Badge Guesser</h1>
 
-<h3>Select Leagues</h3>
+<div class="home-grid">
 
-<div class="league-grid">
+<div class="home-box" onclick="openDifficulty()">
+<img src="images/difficulty.png">
+<p>Difficulty</p>
+</div>
 
-<label><input type="checkbox" value="premier"> Premier League</label>
-<label><input type="checkbox" value="laliga"> LaLiga</label>
-<label><input type="checkbox" value="bundesliga"> Bundesliga</label>
-<label><input type="checkbox" value="random"> Random</label>
+<div class="home-box" onclick="openSelection()">
+<img src="images/leagues.png">
+<p>Selection</p>
+</div>
+
+<div class="home-box" onclick="startRandom()">
+<img src="images/random.png">
+<p>Random</p>
+</div>
+
+<div class="home-box" onclick="openOptions()">
+<img src="images/options.png">
+<p>Options</p>
+</div>
 
 </div>
 
-<div class="menu-buttons">
-
-<button onclick="startGame()">Start</button>
-<button onclick="openExtras()">Extras</button>
-<button onclick="startDaily()">Daily Challenge</button>
-
 </div>
 
-</div>
-
-
-<!-- GAME SCREEN -->
 <div id="game" class="hidden">
 
 <div class="game-card">
-
-<div class="progress-area">
 
 <div class="progress-bar">
 <div id="progressFill"></div>
 </div>
 
-<div class="progress-info">
+<div>
 <span id="progressText"></span> |
 Score: <span id="score">0</span> |
 Time: <span id="timer">15</span>
 </div>
 
-</div>
-
 <img id="logo">
+
 <input 
-id="guessInput" 
+id="guessInput"
 placeholder="Enter club name"
 enterkeyhint="go"
 autocapitalize="off"
+autocomplete="new-password"
+autocorrect="off"
+spellcheck="false"
 >
 
 <button onclick="submitGuess()">Guess</button>
@@ -322,50 +229,45 @@ autocapitalize="off"
 </div>
 
 </div>
-<!-- RESULT POPUP -->
 
 <div id="popup" class="popup hidden">
 
 <h2 id="resultStatus"></h2>
 
 <img id="revealedLogo">
+
 <h2 id="resultText"></h2>
- <div class="burger">
+
 <p id="points"></p>
-  <p id="popupProgress"></p>
+<p id="popupProgress"></p>
+
+<button onclick="nextLogo()">Next</button>
+<button onclick="quitGame()">Quit</button>
+
 </div>
 
- <div class="container">
-
- <button onclick="nextLogo()">Next</button>
-
- <button onclick="quitGame()">Quit</button>
-
-</div></div>
-
-
-<!-- EXTRAS POPUP -->
-<div id="extrasPopup" class="popup hidden">
+<div id="optionsPopup" class="popup hidden">
 
 <div class="extras-box">
 
-<h2>Extras</h2>
+<h2>Options</h2>
 
 <p>Logos: <span id="logoCount">10</span></p>
 
 <input type="range" min="5" max="100" value="10" id="logoSlider">
+<input type="number" min="5" max="100" value="10" id="logoInput">
 
 <br><br>
 
-<label>
-<input type="checkbox" id="blurToggle" checked>
- Enable Blur
-</label>
+<label>Blur</label>
+<select id="blurToggle">
+<option value="no" selected>No</option>
+<option value="yes">Yes</option>
+</select>
 
 <br><br>
 
-<label>Confetti Type</label>
-
+<label>Confetti</label>
 <select id="confettiType">
 <option value="squares">Squares</option>
 <option value="circles">Circles</option>
@@ -374,11 +276,83 @@ autocapitalize="off"
 
 <br><br>
 
-<button onclick="closeExtras()">Close</button>
+<label>Time</label>
+<select id="timeSelect">
+<option value="15">15 Seconds</option>
+<option value="30">30 Seconds</option>
+</select>
+
+<br><br>
+
+<label>Bonus</label>
+<select id="bonusToggle">
+<option value="yes" selected>Yes</option>
+<option value="no">No</option>
+</select>
+
+<br><br>
+
+<button onclick="closeOptions()">Close</button>
 
 </div>
 
 </div>
+
+<div id="difficultyPopup" class="popup hidden">
+
+<div class="extras-box">
+
+<h2>Difficulty</h2>
+
+<button onclick="setDifficulty(1)">⭐ Easy</button>
+<button onclick="setDifficulty(2)">⭐⭐ Medium</button>
+<button onclick="setDifficulty(3)">⭐⭐⭐ Hard</button>
+
+<br><br>
+
+<button onclick="closeDifficulty()">Back</button>
+
+</div>
+
+</div>
+
+<div id="selectionPopup" class="popup hidden">
+
+<div class="extras-box">
+
+<h2>Select Leagues</h2>
+
+<div class="league-grid-select">
+
+<div class="league-box" onclick="toggleLeague('premier', this)">
+<img src="images/premier.png">
+<p>Premier League</p>
+</div>
+
+<div class="league-box" onclick="toggleLeague('laliga', this)">
+<img src="images/laliga.png">
+<p>La Liga</p>
+</div>
+
+<div class="league-box" onclick="toggleLeague('bundesliga', this)">
+<img src="images/bundesliga.png">
+<p>Bundesliga</p>
+</div>
+
+</div>
+
+<br>
+
+<button onclick="startSelectionGame()">Go</button>
+
+</div>
+
+</div>
+
+<div id="loadingScreen" class="popup hidden">
+<h2>Loading...</h2>
+</div>
+
 <script src="premierleague.js"></script>
 <script src="laliga.js"></script>
 <script src="bundesliga.js"></script>
