@@ -311,11 +311,11 @@ function confetti(){
 
 let type=document.getElementById("confettiType").value
 if(type==="off") return
-if(activeConfetti>=3) return
+if(activeConfetti>=30) return
 
 activeConfetti++
 
-for(let i=0;i<3;i++){
+for(let i=0;i<10;i++){
 
 let x=Math.random()*100
 
