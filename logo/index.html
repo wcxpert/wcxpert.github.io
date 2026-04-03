@@ -151,6 +151,16 @@ input::placeholder{
 color:rgba(255,255,255,0.6);
 }
 
+#endPopup h2{
+font-size:28px;
+margin-bottom:10px;
+}
+
+#endPopup p{
+font-size:18px;
+margin:6px 0;
+}
+
 button{
 padding:12px 25px;
 border:none;
@@ -377,6 +387,25 @@ spellcheck="false">
 <h2>Loading...</h2>
 </div>
 
+<div id="endPopup" class="popup hidden">
+
+<div class="extras-box">
+
+<h2>Game Complete!</h2>
+
+<p id="finalScore"></p>
+<p id="finalCorrect"></p>
+<p id="finalAccuracy"></p>
+
+<div class="popup-buttons">
+<button onclick="restartGame()">Play Again</button>
+<button onclick="goHome()">Home</button>
+</div>
+
+</div>
+
+</div>
+  
 <script src="premierleague.js"></script>
 <script src="laliga.js"></script>
 <script src="bundesliga.js"></script>
