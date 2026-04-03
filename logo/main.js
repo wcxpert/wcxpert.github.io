@@ -35,6 +35,7 @@ let total=10
 let timer
 let timeLeft=15
 let activeConfetti=0
+let correctAnswers=0
 
 let selectedLeagues=[]
 let roundTime=15
@@ -215,7 +216,7 @@ let guess=guessInput.value.toLowerCase().trim()
 let team=gameTeams[current]
 
 if(team.answers.includes(guess)){
-
+correctAnswers++
 let base=100
 let bonus=bonusEnabled?Math.floor((timeLeft/roundTime)*100):0
 
@@ -271,14 +272,32 @@ document.getElementById("popup").classList.add("hidden")
 current++
 
 if(current>=total){
-alert("Game Complete! Score: "+score)
-location.reload()
+
+showEndPopup()
+
 }else{
 updateProgress()
 nextRound()
-}
+}  }
+
+function showEndPopup(){
+
+document.getElementById("endPopup").classList.remove("hidden")
+
+let accuracy = Math.round((correctAnswers / total) * 100)
+
+document.getElementById("finalScore").innerText = "Score: " + score
+document.getElementById("finalCorrect").innerText = "Correct: " + correctAnswers + " / " + total
+document.getElementById("finalAccuracy").innerText = "Accuracy: " + accuracy + "%"
+
 }
 
+function restartGame(){
+location.reload()
+}
+function goHome(){
+location.reload()
+}
 function quitGame(){
 location.reload()
 }
